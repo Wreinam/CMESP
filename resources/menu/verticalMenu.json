@@ -1,0 +1,142 @@
+{
+  "menuAdmin": [
+    {
+      "url": "/dashboard/admin",
+      "name": "Ínicio",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-admin"
+    },
+    {
+      "name": "Cadastrar",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "dashboard-admin-cadastrar",
+      "submenu":[
+        {
+          "url": "/dashboard/admin/cadastrar/modalidade",
+          "name": "Modalidade",
+          "slug": "dashboard-admin-cadastrar-modalidade"
+        },
+        {
+          "url": "/dashboard/admin/cadastrar/professor",
+          "name": "Professor",
+          "slug": "dashboard-admin-cadastrar-professor"
+        },
+        {
+          "url": "/dashboard/admin/cadastrar/endereco",
+          "name": "Endereço",
+          "slug": "dashboard-admin-cadastrar-endereco"
+        },
+        {
+          "url": "/dashboard/admin/cadastrar/turma",
+          "name": "Turma",
+          "slug": "dashboard-admin-cadastrar-turma"
+        }
+      ]
+    },
+    {
+      "name": "Relatorios",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "dashboard-admin-relatorios",
+      "submenu":[
+        {
+          "url": "/dashboard/admin/relatorios/demanda",
+          "name": "Demanda",
+          "slug": "dashboard-admin-relatorios-demanda"
+        }
+      ]
+    }
+  ],
+  "menuAluno": [
+    {
+      "url": "/dashboard/aluno",
+      "name": "ínicio",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-aluno"
+    },
+    {
+      "url": "/dashboard/aluno/cadastro/anamnese",
+      "name": "Anamnese",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-aluno-cadastro-anamnese"
+    },
+    {
+      "url": "/dashboard/aluno/cadastro/turma",
+      "name": "Turma",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-aluno-cadastro-turma"
+    }
+    
+  ],
+  "menuProfessor": [
+    {
+      "url": "/dashboard/professor",
+      "name": "Ínicio",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-professor"
+    },
+    {
+      "url": "/dashboard/professor/buscar/lista",
+      "name": "Aprovar",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-professor-buscar-lista"
+    },
+    {
+      "url": "/dashboard/professor/buscar/chamada",
+      "name": "Chamada",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-professor-buscar-chamada"
+    },
+    {
+      "url": "/dashboard/professor/buscar/alunos",
+      "name": "Dados alunos",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard-professor-buscar-alunos"
+    }
+  ],
+
+  "menuTeste": [
+    {
+      "url": "/dashboard/admin",
+      "name": "Cadastrar",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "/dashboard-teste"
+    },
+    {
+      "name": "Layouts",
+      "icon": "menu-icon tf-icons bx bx-layout",
+      "slug": "layouts",
+      "submenu": [
+        {
+          "url": "/layouts/without-menu",
+          "name": "Without menu",
+          "slug": "layouts-without-menu"
+        },
+        {
+          "url": "/layouts/without-navbar",
+          "name": "Without navbar",
+          "slug": "layouts-without-navbar"
+        }
+      ]
+    },
+    {
+      "menuHeader": "Pages"
+    },
+    {
+      "name": "Account Settings",
+      "icon": "menu-icon tf-icons bx bx bx-dock-top",
+      "slug": "pages-account-settings",
+      "submenu": [
+        {
+          "url": "/pages/account-settings-account",
+          "name": "Account",
+          "slug": "pages-account-settings-account"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Notifications",
+          "slug": "pages-account-settings-notifications"
+        }
+      ]
+    }
+  ]
+}
