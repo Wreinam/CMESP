@@ -169,6 +169,7 @@ class TurmaController extends Controller
      */
     public function destroy(Request $request)
     {
+        Aula::where('turma_id', $request->id)->delete();
         Turma::where('id', $request->id)->delete();
     }
 }
