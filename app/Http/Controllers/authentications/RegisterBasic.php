@@ -36,6 +36,7 @@ class RegisterBasic extends Controller
     $idade = $this->calcularIdadeAPartirDaData($request->data_nascimento);
 
     $user = new User();
+    $user->imagem_perfil = "avatarPadrao.png";
     $user->name = $request->nome_aluno;
     $user->email = $request->email;
     $user->cpf = preg_replace('/[^0-9]/', '', $request->cpf_aluno);

@@ -54,6 +54,7 @@ class ProfessorController extends Controller
                 [
                     'name' => $request->nome,
                     'email' => $request->email,
+                    'imagem_perfil' => "avatarPadrao.png",
                     'cpf' => $cpf,
                     'password' => Hash::make($request->senha),
                     'permissao' => "Professor",

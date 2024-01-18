@@ -34,7 +34,7 @@
                     <div class="position-relative">
                         <select class="multiple-cardiaco select2 form-select form-control" id="cardiaco" name="cardiaco[]"
                             multiple="multiple">
-                            @foreach (['Alergias a medicamentos como antibióticos', 'Rinite alérgica', 'Asma', 'Alergias a picadas de insetos como pernilongos', 'Alergias alimentares'] as $opcao)
+                            @foreach (['Hipertensão arterial', 'Doença coronariana', 'Doença cerebrovascular', 'Doença arterial periférica', 'Doença cardíaca reumática','Arritimia'] as $opcao)
                                 @php
                                     $opcaoSelecionada = isset($anamnese->cardiaco) && in_array($opcao, $anamnese->cardiaco);
                                 @endphp
@@ -46,11 +46,12 @@
                                 @foreach ($anamnese->cardiaco as $item)
                                     @if (
                                         !in_array($item, [
-                                            'Alergias a medicamentos como antibióticos',
-                                            'Rinite alérgica',
-                                            'Asma',
-                                            'Alergias a picadas de insetos como pernilongos',
-                                            'Alergias alimentares',
+                                            'Hipertensão arterial',
+                                            'Doença coronariana',
+                                            'Doença cerebrovascular',
+                                            'Doença arterial periférica',
+                                            'Doença cardíaca reumática',
+                                            'Arritmia',
                                         ]))
                                         <option value="{{ $item }}" selected>{{ $item }}</option>
                                     @endif
@@ -65,7 +66,7 @@
                     <div class="position-relative">
                         <select class="multiple-alergia select2 form-select form-control" id="alergia" name="alergia[]"
                             multiple="multiple">
-                            @foreach (['Alergias a medicamentos como antibióticos', 'Rinite alérgica', 'Asma', 'Alergias a picadas de insetos como pernilongos', 'Alergias alimentares'] as $opcao)
+                            @foreach (['Alergia medicamentosa', 'Rinite alérgica', 'Asma', 'Alergias a picadas de insetos como pernilongos', 'Alergias alimentares'] as $opcao)
                                 @php
                                     $opcaoSelecionada = isset($anamnese->alergia) && in_array($opcao, $anamnese->alergia);
                                 @endphp
@@ -77,7 +78,7 @@
                                 @foreach ($anamnese->alergia as $item)
                                     @if (
                                         !in_array($item, [
-                                            'Alergias a medicamentos como antibióticos',
+                                            'Alergia medicamentosa',
                                             'Rinite alérgica',
                                             'Asma',
                                             'Alergias a picadas de insetos como pernilongos',
@@ -97,7 +98,7 @@
                     <div class="position-relative">
                         <select class="multiple-osseo select2 form-select form-control" id="osseo" name="osseo[]"
                             multiple="multiple">
-                            @foreach (['Alergias a medicamentos como antibióticos', 'Rinite alérgica', 'Asma', 'Alergias a picadas de insetos como pernilongos', 'Alergias alimentares'] as $opcao)
+                            @foreach (['Osteoporose', 'Fibromialgia', 'Tumor ósseo', 'artrite e/ou artrose'] as $opcao)
                                 @php
                                     $opcaoSelecionada = isset($anamnese->osseo) && in_array($opcao, $anamnese->osseo);
                                 @endphp
@@ -109,11 +110,10 @@
                                 @foreach ($anamnese->osseo as $item)
                                     @if (
                                         !in_array($item, [
-                                            'Alergias a medicamentos como antibióticos',
-                                            'Rinite alérgica',
-                                            'Asma',
-                                            'Alergias a picadas de insetos como pernilongos',
-                                            'Alergias alimentares',
+                                            'Osteoporose', 
+                                            'Fibromialgia', 
+                                            'Tumor ósseo', 
+                                            'artrite e/ou artrose',
                                         ]))
                                         <option value="{{ $item }}" selected>{{ $item }}</option>
                                     @endif
