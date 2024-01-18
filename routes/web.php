@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Aluno']], function () {
 
         Route::get('cadastro/turma', [Turma_AlunoController::class, 'index'])->name('dashboard-aluno-cadastro-turma');
         Route::post('cadastro/turma', [Turma_AlunoController::class, 'storeListaEspera'])->name('cadastrar-lista-turma');
+        Route::post('cadastro/filtrar', [Turma_AlunoController::class,'filtrarTurma'])->name('filtrar-turmas');
     });
 });
 

@@ -1,7 +1,29 @@
 @extends('content/dashboard/aluno/dashboards-aluno')
 
 @section('content')
-    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+    <div class="mb-3 justify-content-start row row-cols-md-4">
+        <div class="col-12">
+            <label for="exampleFormControlSelect1" class="form-label">Bairro</label>
+            <select class="form-select" id="bairroSelect" onchange="filtrarTurma(this.value,modalidadeSelect.value)"
+                aria-label="Default select example">
+                @foreach ($bairros as $bairro)
+                    <option value="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-12">
+            <label for="exampleFormControlSelect1" class="form-label">Modalidade</label>
+            <select class="form-select" id="modalidadeSelect" aria-label="Default select example"
+                onchange="filtrarTurma(bairroSelect.value,this.value)">
+                <option value="" disabled selected hidden>Todas</option>
+                @foreach ($modalidades as $modalidade)
+                    <option value="{{ $modalidade->id }}">{{ $modalidade->nome }}</option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4" id="divTurmas">
+
         @foreach ($turmas as $turma)
             <div class="col">
                 <div class="card text-center" style="width: 18rem;">
@@ -24,9 +46,9 @@
                             <button type="button" class="btn btn-primary"
                                 onclick="cadastrarTurma({{ $turma->id }})">Cadastrar</button>
                         @else
-                        <a href="{{ route('dashboard-aluno-cadastro-anamnese') }}">
-                            <button type="button" class="btn btn-danger">Clique aqui para fazer anamnese</button>
-                        </a>
+                            <a href="{{ route('dashboard-aluno-cadastro-anamnese') }}">
+                                <button type="button" class="btn btn-danger">Clique aqui para fazer anamnese</button>
+                            </a>
                         @endif
 
                     </div>
@@ -38,7 +60,7 @@
             </div>
         @endforeach
     </div>
-    <nav aria-label="Page navigation">
+    {{-- <nav aria-label="Page navigation">
         <ul class="pagination">
             @if ($turmas->onFirstPage())
                 <li class="page-item disabled" aria-disabled="true">
@@ -77,7 +99,7 @@
     </nav>
     <div>
         Exibindo {{ $turmas->firstItem() }} - {{ $turmas->lastItem() }} de {{ $turmas->total() }} turmas
-    </div>
+    </div> --}}
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="mensagem" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
@@ -94,6 +116,7 @@
 @section('script-da-pagina')
     <script>
         @if (isset($existeAnamnese) && $existeAnamnese == true)
+
             function cadastrarTurma(id) {
                 $.ajax({
                     url: '{{ route('cadastrar-lista-turma') }}',
@@ -113,5 +136,64 @@
                 });
             }
         @endif
+
+        function filtrarTurma(bairro, modalidade) {
+            $.ajax({
+                url: '{{ route('filtrar-turmas') }}',
+                type: 'POST',
+                data: {
+                    bairro: bairro,
+                    modalidade: modalidade,
+                },
+                success: function(response) {
+                    console.log(response)
+                    document.getElementById('divTurmas').innerHTML = '';
+                    response.turmaFiltrada.forEach(element => {
+                        console.log(element);
+                        
+                        // Adicionar cada elemento à div (substitua 'seuConteudo' pelo que você deseja exibir)
+                        document.getElementById('divTurmas').innerHTML += `<div class="col">
+                <div class="card text-center" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">${element.modalidade.nome}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Nível: ${element.nivel}</li>
+                        <li class="list-group-item">Idade min - max: ${element.idade_min_max} anos</li>
+                        <li class="list-group-item">Professor: ${element.professor.name}</li>
+                        <li class="list-group-item">Horário: ${element.horario}</li>
+                        <li class="list-group-item">Dias da semana: ${element.dias_semana}</li>
+                        <li class="list-group-item">Bairro: ${element.endereco.bairro}</li>
+                        <li class="list-group-item">Rua: ${element.endereco.rua}</li>
+                        <li class="list-group-item">Nome do Local: ${element.endereco.nome_local}</li>
+
+                    </ul>
+                    <div class="card-body">
+                        @if (isset($existeAnamnese) && $existeAnamnese == true)
+                            <button type="button" class="btn btn-primary"
+                                onclick="cadastrarTurma({{ $turma->id }})">Cadastrar</button>
+                        @else
+                            <a href="{{ route('dashboard-aluno-cadastro-anamnese') }}">
+                                <button type="button" class="btn btn-danger">Clique aqui para fazer anamnese</button>
+                            </a>
+                        @endif
+
+                    </div>
+                    <div class="card-footer text-muted">
+                        Periódo: ${element.data_inicio} até ${element.data_termino}
+                    </div>
+                </div>
+
+            </div>`;
+                    });
+                    console.log(response);
+
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+        }
     </script>
 @endsection
