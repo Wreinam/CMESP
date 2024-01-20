@@ -171,7 +171,7 @@
                     <div class="card-body">
                         @if (isset($existeAnamnese) && $existeAnamnese == true)
                             <button type="button" class="btn btn-primary"
-                                onclick="cadastrarTurma({{ $turma->id }})">Cadastrar</button>
+                                onclick="cadastrarTurma(${element.id})">Cadastrar</button>
                         @else
                             <a href="{{ route('dashboard-aluno-cadastro-anamnese') }}">
                                 <button type="button" class="btn btn-danger">Clique aqui para fazer anamnese</button>
