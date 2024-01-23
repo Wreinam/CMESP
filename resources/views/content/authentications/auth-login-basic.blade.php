@@ -3,79 +3,108 @@
 @section('title', 'Login')
 
 @section('page-style')
-<!-- Page -->
-<link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}">
+    <!-- Page -->
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}">
 @endsection
 
 @section('content')
-<div class="container-xxl">
-  <div class="authentication-wrapper authentication-basic container-p-y">
-    <div class="authentication-inner">
-      <!-- Register -->
-      <div class="card">
-        <div class="card-body">
-          <!-- Logo -->
-          <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">@include('_partials.macros',["width"=>25,"withbg"=>'#696cff'])</span>
-              <span class="demo text-body fw-bolder fs-3">{{config('variables.templateName')}}</span>
-            </a>
-          </div>
-          <!-- /Logo -->
-          <h4 class="mb-2">Bem vindo ao {{config('variables.templateName')}}! 👋</h4>
-          <p class="mb-4">Por-Favor faça login</p>
-          @if ($mensagem = Session::get('Erro'))
-          {{$mensagem}}
-              
-          @endif
-          @if($errors->any())
-            @foreach ($errors->all() as $error)
-                {{$error}}<br>
-            @endforeach
-          @endif
-
-          <form id="formAuthentication" class="mb-3" action="/logar" method="POST">
-            @csrf
-            <div class="mb-3">
-              <label for="usuario" class="form-label">Email ou CPF</label>
-              <input type="text" class="form-control" id="email" name="usuario" placeholder="Coloque seu email ou CPF" autofocus>
+    @if (session()->has('registrado'))
+        <div class="modal fade show" id="modalSucesso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Sucesso no cadastro</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body alert-success m-2 ">
+                        <p class="fs-5 text-dark">Seu cadastro foi efetuado com sucesso!!</p>
+                        <p class="fs-5 text-dark">Pode estar fazendo o login!!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3 form-password-toggle">
-              <div class="d-flex justify-content-between">
-                <label class="form-label" for="password">Senha</label>
-                <a href="/forgot-password">
-                  <small>Esqueceu a senha?</small>
-                </a>
-              </div>
-              <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-              </div>
-            </div>
-            <div class="mb-3">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="remember-me">
-                <label class="form-check-label" for="remember-me">
-                  Relembrar senha
-                </label>
-              </div>
-            </div>
-            <div class="mb-3">
-              <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
-            </div>
-          </form>
-
-          <p class="text-center">
-            <span>Deseja praticar esportes?</span>
-            <a href="\register">
-              <span>Crie uma conta</span>
-            </a>
-          </p>
         </div>
-      </div>
+        <script>
+            window.onload = function() {
+                $(document).ready(function() {
+                    $('#modalSucesso').modal('show');
+                });
+            };
+        </script>
+    @endif
+
+    <div class="container-xxl">
+        <div class="authentication-wrapper authentication-basic container-p-y">
+            <div class="authentication-inner">
+                <!-- Register -->
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Logo -->
+                        <div class="app-brand justify-content-center">
+                            <a href="{{ url('/') }}" class="app-brand-link gap-2">
+                                <span class="app-brand-logo demo">@include('_partials.macros', ['width' => 25, 'withbg' => '#696cff'])</span>
+                                <span class="demo text-body fw-bolder fs-3">{{ config('variables.templateName') }}</span>
+                            </a>
+                        </div>
+                        <!-- /Logo -->
+                        <h4 class="mb-2">Bem vindo ao {{ config('variables.templateName') }}! 👋</h4>
+                        <p class="mb-4">Por-Favor faça login</p>
+                        @if ($mensagem = Session::get('Erro'))
+                            {{ $mensagem }}
+                        @endif
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br>
+                            @endforeach
+                        @endif
+
+                        <form id="formAuthentication" class="mb-3" action="/logar" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="usuario" class="form-label">Email ou CPF</label>
+                                <input type="text" class="form-control" id="email" name="usuario"
+                                    placeholder="Coloque seu email ou CPF" autofocus>
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label" for="password">Senha</label>
+                                    <a href="/forgot-password">
+                                        <small>Esqueceu a senha?</small>
+                                    </a>
+                                </div>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                        aria-describedby="password" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember-me">
+                                    <label class="form-check-label" for="remember-me">
+                                        Relembrar senha
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                            </div>
+                        </form>
+
+                        <p class="text-center">
+                            <span>Deseja praticar esportes?</span>
+                            <a href="\register">
+                                <span>Crie uma conta</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- /Register -->
+        </div>
     </div>
-    <!-- /Register -->
-  </div>
-</div>
-</div>
+    </div>
 @endsection

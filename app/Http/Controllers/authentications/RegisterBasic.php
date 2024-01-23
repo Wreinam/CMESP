@@ -22,10 +22,18 @@ class RegisterBasic extends Controller
 
   public function store(Request $request)
   {
+    $request->merge(['cpf_aluno' => str_replace(['.', '-'], '', $request->input('cpf_aluno'))]);
     $validator = Validator::make($request->all(), [
       'nome_aluno' => 'required|string|max:255',
       'email' => 'required|string|email|max:255|unique:users',
-      'password' => 'required|string|min:8|confirmed', // Confirmação de senha
+      'password' => 'required|string|min:8|confirmed',
+      'cpf_aluno' => [
+        'required',
+        'unique:users,cpf,NULL,id', // Use 'CPF' como nome real do campo no banco
+        
+    ],
+    
+    
     ], [
       'name.required' => 'O campo nome é obrigatório.',
       'email.required' => 'O campo e-mail é obrigatório.',
@@ -34,7 +42,9 @@ class RegisterBasic extends Controller
       'password.required' => 'O campo senha é obrigatório.',
       'password.min' => 'A senha deve ter pelo menos :min caracteres.',
       'password.confirmed' => 'A confirmação da senha não corresponde.',
-  ]);
+      'cpf_aluno.required' => 'O campo CPF é obrigatório.',
+      'cpf_aluno.unique' => 'Este CPF já está em uso.',
+    ]);
 
     if ($validator->fails()) {
       return redirect('register')
@@ -94,7 +104,7 @@ class RegisterBasic extends Controller
       $rg_responsavel_frente_image_name = md5($request->rg_responsavel_frente->getClientOriginalName() . strtotime('now')) . "." . $request->rg_responsavel_frente->extension();
       $responsavelDado->rgFrenteResponsavel = $rg_responsavel_frente_image_name;
       $request->rg_responsavel_frente->move(public_path('assets/img/rg_responsavel'), $rg_responsavel_frente_image_name);
-      
+
       $rg_responsavel_verso_image_name = md5($request->rg_responsavel_verso->getClientOriginalName() . strtotime('now')) . "." . $request->rg_responsavel_verso->extension();
       $responsavelDado->rgVersoResponsavel = $rg_responsavel_verso_image_name;
       $request->rg_responsavel_verso->move(public_path('assets/img/rg_responsavel'), $rg_responsavel_verso_image_name);
@@ -103,7 +113,7 @@ class RegisterBasic extends Controller
       $responsavelDado->save();
     }
 
-    return redirect('/');
+    return redirect('/')->with('registrado', 'Registrado');
   }
 
   private function calcularIdadeAPartirDaData($dataNascimento)
