@@ -10,7 +10,6 @@ use App\Models\Matricula;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
-use Illuminate\Support\Facades\Mail;
 
 class Turma_Professor extends Controller
 {
@@ -130,14 +129,14 @@ class Turma_Professor extends Controller
             $numeroLimpo = preg_replace('/[^0-9]/', '', $telefone);
 
             $sid = 'ACe2d48e8101834e970412bb59c83f22e8';
-            $token = 'ccec69b526572f9a9d5c5a92a7d74beb';
+            $token = '63c20c556e16819c080ce700789df295';
             $twilio_number = '+14422336160';
 
             // Número de destino
             $to_number = '+55' . $numeroLimpo;  // Substitua pelo número para o qual você deseja enviar o SMS
 
             // Mensagem a ser enviada
-            $message = 'Parabéns ' . $nomeAluno . ' você foi aprovado pela Secretaria de Esportes, compareça no próximo dia de aula de: ' . $modalidade . ' no horário: ' . $horario . ' para ter aula';
+            $message = 'Parabéns ' . $nomeAluno . ' você foi aprovado pela secretaria, compareça na aula de ' . $modalidade . ' no horário: ' . $horario . 'para ter aula';
 
             // Crie um cliente Twilio
             $twilio = new Client($sid, $token);
@@ -147,11 +146,10 @@ class Turma_Professor extends Controller
                 $to_number,
                 [
                     'from' => $twilio_number,
-                    'body' => $message
+                    'body' => $message,
                 ]
             );
 
-            
 
 
 
@@ -193,9 +191,6 @@ class Turma_Professor extends Controller
      */
     public function destroy($id)
     {
-    }
-
-    public function notificacaoAprovado(string $nomeAluno, string $telefone, string $horario, string $modalidade)
-    {
+        //
     }
 }
