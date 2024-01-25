@@ -24,7 +24,7 @@ class Aluno extends Controller
         $turmasListaEspera = $user->turmas()->with('modalidade:id,nome', 'professor:id,name', 'endereco')->get();
 
         if($user->matriculas){
-            $matriculas = $user->matriculas->with('turma.professor:name,id', 'turma.modalidade:nome,id')->get();
+            $matriculas = $user->matriculas()->with('turma.professor:name,id', 'turma.modalidade:nome,id')->get();
         }else{
             $matriculas = null;
         }

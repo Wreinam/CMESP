@@ -9,17 +9,19 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Matricula;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Mail;
 
 class Turma_Professor extends Controller
 {
     public function listarTurma()
     {
         $turmasDoProfessor = Auth::user()->turmasProfessor()
-        ->with('modalidade:id,nome', 'endereco')
-        ->where('professor_id', Auth::id())
-        ->get();
+            ->with('modalidade:id,nome', 'endereco')
+            ->where('professor_id', Auth::id())
+            ->get();
 
-        
+
         return view('content.professor_metodos.turmas.alunos', compact(['turmasDoProfessor']));
     }
 
@@ -30,21 +32,23 @@ class Turma_Professor extends Controller
         return response()->json($matriculas);
     }
 
+
+
+
     public function showAluno(Request $request)
     {
-        $aluno = User::with('user_informacoe','user_estuda','responsavel_dados','user_anamnese')->find($request->id);
+        $aluno = User::with('user_informacoe', 'user_estuda', 'responsavel_dados', 'user_anamnese')->find($request->id);
         return response()->json($aluno);
     }
+
     public function updateMatricula(Request $request)
     {
         $matricula = Matricula::find($request->id);
         $turma = Turma::find($matricula->turma_id);
         $matricula->update(['status' => 'Desmatriculado']);
-        
+
         $matriculas = $turma->matriculas()->select('name', 'matriculas.*')->where('status', 'Matriculado')->get();
         return response()->json($matriculas);
-
-        
     }
 
 
@@ -59,11 +63,11 @@ class Turma_Professor extends Controller
     public function index()
     {
         $turmasDoProfessor = Auth::user()->turmasProfessor()
-        ->with('modalidade:id,nome', 'endereco')
-        ->where('professor_id', Auth::id())
-        ->get();
+            ->with('modalidade:id,nome', 'endereco')
+            ->where('professor_id', Auth::id())
+            ->get();
 
-        
+
         return view('content.professor_metodos.aprovar.aprovar', compact(['turmasDoProfessor']));
     }
 
@@ -118,8 +122,41 @@ class Turma_Professor extends Controller
             $turma = Turma::find($idTurma);
             $alunos = $turma->users()->select('name')->get();
 
-            return response()->json($alunos);
+            $nomeAluno = User::find($idAluno)->name;
+            $telefone = User::with('user_informacoe')->find($idAluno)->user_informacoe->telefone;
+            $modalidade = $turma->modalidade->nome;
+            $horario = $turma->horario;
 
+            $numeroLimpo = preg_replace('/[^0-9]/', '', $telefone);
+
+            $sid = 'ACe2d48e8101834e970412bb59c83f22e8';
+            $token = 'ccec69b526572f9a9d5c5a92a7d74beb';
+            $twilio_number = '+14422336160';
+
+            // Número de destino
+            $to_number = '+55' . $numeroLimpo;  // Substitua pelo número para o qual você deseja enviar o SMS
+
+            // Mensagem a ser enviada
+            $message = 'Parabéns ' . $nomeAluno . ' você foi aprovado pela Secretaria de Esportes, compareça no próximo dia de aula de: ' . $modalidade . ' no horário: ' . $horario . ' para ter aula';
+
+            // Crie um cliente Twilio
+            $twilio = new Client($sid, $token);
+
+            // Envie a mensagem
+            $twilio->messages->create(
+                $to_number,
+                [
+                    'from' => $twilio_number,
+                    'body' => $message
+                ]
+            );
+
+            
+
+
+
+
+            return response()->json($alunos);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -156,6 +193,9 @@ class Turma_Professor extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+
+    public function notificacaoAprovado(string $nomeAluno, string $telefone, string $horario, string $modalidade)
+    {
     }
 }

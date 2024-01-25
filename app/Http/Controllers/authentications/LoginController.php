@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Bairro;
+use Twilio\Rest\Client;
+use App\Models\Turma;
 
 class LoginController extends Controller
 {
