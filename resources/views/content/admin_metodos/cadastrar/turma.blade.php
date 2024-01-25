@@ -153,9 +153,10 @@
                             <label for="nivel" class="form-label">Nivél:</label>
                             <select id="nivel" class="form-control" name="nivel" required>
                                 <option value="" disabled selected hidden>Escolha o nivél</option>
-                                <option value="iniciante">Iniciante</option>
-                                <option value="intermediario">Intermediário</option>
-                                <option value="avancado">Avançado</option>
+                                <option value="Iniciante">Iniciante</option>
+                                <option value="Intermediario">Intermediário</option>
+                                <option value="Avancado">Avançado</option>
+                                <option value="Treinamento">Treinamento</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6 mb-3">
