@@ -53,12 +53,12 @@
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="rg_responsavel_frente" class="form-label">RG responsável - Frente</label>
                                     <input type="file" class="form-control" id="rg_responsavel_frente"
-                                        name="rg_responsavel_frente" accept=".png, .jpeg .jpg" autofocus>
+                                        name="rg_responsavel_frente" accept=".png, .jpeg, .jpg" autofocus>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="rg_responsavel_verso" class="form-label">RG responsável - Verso</label>
                                     <input type="file" class="form-control" id="rg_responsavel_verso"
-                                        name="rg_responsavel_verso" accept=".png, .jpeg .jpg" autofocus>
+                                        name="rg_responsavel_verso" accept=".png, .jpeg, .jpg" autofocus>
                                 </div>
                             </div>
                             <div class="row align-items-start">
@@ -98,12 +98,12 @@
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="rg_aluno_frente" class="form-label">RG aluno - Frente</label>
                                     <input type="file" class="form-control" id="rg_aluno_frente"
-                                        name="rg_aluno_frente" accept=".png, .jpeg .jpg" autofocus required>
+                                        name="rg_aluno_frente" accept=".png, .jpeg, .jpg" autofocus required>
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="rg_aluno_verso" class="form-label">RG aluno - Verso</label>
                                     <input type="file" class="form-control" id="rg_aluno_verso" name="rg_aluno_verso"
-                                        accept=".png, .jpeg .jpg" autofocus required>
+                                        accept=".png, .jpeg, .jpg" autofocus required>
                                 </div>
                             </div>
                             <div class="row align-items-start">

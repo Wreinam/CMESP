@@ -20,8 +20,12 @@ class Turma_AlunoController extends Controller
         $existeAnamnese = Anamnese::where('aluno_id', auth()->id())->exists();
         $turmas = Turma::paginate(6);
 
-        $modalidades = Modalidade::all();
-        $bairros = Bairro::all('*');
+        $modalidades = Modalidade::orderBy('nome')->get();
+        $bairros = Bairro::orderBy('nome')->get();
+        $professores = User::where('permissao', 'Professor')->orderBy('name')->get(['id', 'name']);
+
+
+
 
         foreach ($turmas as $turma) {
             $turma->dias_semana = implode(' , ', json_decode($turma->dias_semana));
@@ -29,16 +33,18 @@ class Turma_AlunoController extends Controller
             $turma->professor = $turma->professor->name;
             $turma->endereco = $turma->endereco;
         }
-        return view('content.aluno_metodos.cadastro_turma.cadastro_turma', compact(['turmas', 'existeAnamnese', 'modalidades', 'bairros']));
+        return view('content.aluno_metodos.cadastro_turma.cadastro_turma', compact(['turmas', 'existeAnamnese', 'modalidades', 'bairros', 'professores']));
     }
 
     public function filtrarTurma(Request $request)
     {
         $turmasFiltrada = Turma::where('modalidade_id', $request->modalidade)
-            ->whereHas('endereco', function ($query) use ($request) {
-                $query->where('bairro', $request->bairro);
-            })
-            ->get();
+        ->whereHas('endereco', function ($query) use ($request) {
+            $query->where('bairro', $request->bairro);
+        })
+        ->where('professor_id', $request->professor)
+        ->get();
+    
 
         foreach ($turmasFiltrada as $turma) {
             $turma->dias_semana = implode(' , ', json_decode($turma->dias_semana));

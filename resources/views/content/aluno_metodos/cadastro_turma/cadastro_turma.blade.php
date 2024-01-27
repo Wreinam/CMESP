@@ -4,8 +4,9 @@
     <div class="mb-3 justify-content-start row row-cols-md-4">
         <div class="col-12">
             <label for="exampleFormControlSelect1" class="form-label">Bairro</label>
-            <select class="form-select" id="bairroSelect" onchange="filtrarTurma(this.value,modalidadeSelect.value)"
+            <select class="form-select" id="bairroSelect" onchange="filtrarTurma(this.value,modalidadeSelect.value, professorSelect.value)"
                 aria-label="Default select example">
+                <option value="" disabled selected hidden>Todos</option>
                 @foreach ($bairros as $bairro)
                     <option value="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
                 @endforeach
@@ -14,10 +15,23 @@
         <div class="col-12">
             <label for="exampleFormControlSelect1" class="form-label">Modalidade</label>
             <select class="form-select" id="modalidadeSelect" aria-label="Default select example"
-                onchange="filtrarTurma(bairroSelect.value,this.value)">
+                onchange="filtrarTurma(bairroSelect.value,this.value, professorSelect.value)">
                 <option value="" disabled selected hidden>Todas</option>
                 @foreach ($modalidades as $modalidade)
                     <option value="{{ $modalidade->id }}">{{ $modalidade->nome }}</option>
+                @endforeach
+            </select>
+            
+        </div>
+        <div class="col-12">
+            <label for="exampleFormControlSelect1" class="form-label">Professor</label>
+            <select class="form-select" id="professorSelect" aria-label="Default select example"
+                onchange="filtrarTurma(bairroSelect.value,modalidadeSelect.value, this.value)">
+                <option value="" disabled selected hidden>Todos</option>
+                
+                @foreach ($professores as $professor)
+
+                    <option value="{{ $professor->id }}">{{ $professor->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -137,13 +151,14 @@
             }
         @endif
 
-        function filtrarTurma(bairro, modalidade) {
+        function filtrarTurma(bairro, modalidade, professor) {
             $.ajax({
                 url: '{{ route('filtrar-turmas') }}',
                 type: 'POST',
                 data: {
                     bairro: bairro,
                     modalidade: modalidade,
+                    professor:professor,
                 },
                 success: function(response) {
                     console.log(response)

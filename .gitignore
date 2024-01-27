@@ -12,3 +12,6 @@ yarn-error.log
 /.idea
 /.vscode
 .vercel
+/public/assets/img/rg_aluno
+/public/assets/img/rg_responsavel
+/public/assets/img/perfil
