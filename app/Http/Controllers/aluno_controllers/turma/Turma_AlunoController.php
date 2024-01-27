@@ -38,22 +38,36 @@ class Turma_AlunoController extends Controller
 
     public function filtrarTurma(Request $request)
     {
-        $turmasFiltrada = Turma::where('modalidade_id', $request->modalidade)
-        ->whereHas('endereco', function ($query) use ($request) {
-            $query->where('bairro', $request->bairro);
+        $turmasFiltradas = Turma::where(function ($query) use ($request) {
+            
+            // Verifica se a modalidade foi escolhida
+            if ($request->modalidade && $request->modalidade != 'todos') {
+                $query->where('modalidade_id', $request->modalidade);
+            }
+    
+            // Verifica se o bairro foi escolhido
+            if ($request->bairro && $request->bairro != 'todos') {
+                $query->whereHas('endereco', function ($innerQuery) use ($request) {
+                    $innerQuery->where('bairro', $request->bairro);
+                });
+            }
+    
+            // Verifica se o professor foi escolhido
+            if ($request->professor && $request->professor != 'todos') {
+                $query->where('professor_id', $request->professor);
+            }
         })
-        ->where('professor_id', $request->professor)
         ->get();
     
 
-        foreach ($turmasFiltrada as $turma) {
+        foreach ($turmasFiltradas as $turma) {
             $turma->dias_semana = implode(' , ', json_decode($turma->dias_semana));
             $turma->modalidade = $turma->modalidade->nome;
             $turma->professor = $turma->professor->name;
             $turma->endereco = $turma->endereco;
         }
 
-        return response()->json(['turmaFiltrada' => $turmasFiltrada]);
+        return response()->json(['turmaFiltrada' => $turmasFiltradas]);
     }
 
     public function storeListaEspera(Request $request)

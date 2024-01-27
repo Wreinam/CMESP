@@ -1,12 +1,12 @@
 @extends('content/dashboard/aluno/dashboards-aluno')
 
 @section('content')
-    <div class="mb-3 justify-content-start row row-cols-md-4">
+    <div class="mb-3 mx-auto justify-content-start row row-cols-md-4">
         <div class="col-12">
             <label for="exampleFormControlSelect1" class="form-label">Bairro</label>
             <select class="form-select" id="bairroSelect" onchange="filtrarTurma(this.value,modalidadeSelect.value, professorSelect.value)"
                 aria-label="Default select example">
-                <option value="" disabled selected hidden>Todos</option>
+                <option value="" selected>Todos</option>
                 @foreach ($bairros as $bairro)
                     <option value="{{ $bairro->nome }}">{{ $bairro->nome }}</option>
                 @endforeach
@@ -16,7 +16,7 @@
             <label for="exampleFormControlSelect1" class="form-label">Modalidade</label>
             <select class="form-select" id="modalidadeSelect" aria-label="Default select example"
                 onchange="filtrarTurma(bairroSelect.value,this.value, professorSelect.value)">
-                <option value="" disabled selected hidden>Todas</option>
+                <option value="" selected>Todas</option>
                 @foreach ($modalidades as $modalidade)
                     <option value="{{ $modalidade->id }}">{{ $modalidade->nome }}</option>
                 @endforeach
@@ -27,7 +27,7 @@
             <label for="exampleFormControlSelect1" class="form-label">Professor</label>
             <select class="form-select" id="professorSelect" aria-label="Default select example"
                 onchange="filtrarTurma(bairroSelect.value,modalidadeSelect.value, this.value)">
-                <option value="" disabled selected hidden>Todos</option>
+                <option value="" selected>Todos</option>
                 
                 @foreach ($professores as $professor)
 
@@ -40,7 +40,7 @@
 
         @foreach ($turmas as $turma)
             <div class="col">
-                <div class="card text-center" style="width: 18rem;">
+                <div class="card text-center mx-auto" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $turma->modalidade }}</h5>
                     </div>
