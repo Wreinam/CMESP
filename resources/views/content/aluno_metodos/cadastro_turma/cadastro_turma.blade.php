@@ -66,9 +66,6 @@
                         @endif
 
                     </div>
-                    <div class="card-footer text-muted">
-                        Periódo: {{ $turma->data_inicio }} até {{ $turma->data_termino }}
-                    </div>
                 </div>
 
             </div>
@@ -193,9 +190,6 @@
                             </a>
                         @endif
 
-                    </div>
-                    <div class="card-footer text-muted">
-                        Periódo: ${element.data_inicio} até ${element.data_termino}
                     </div>
                 </div>
 

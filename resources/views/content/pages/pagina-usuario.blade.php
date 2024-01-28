@@ -34,7 +34,7 @@
                                     <span class="d-none d-sm-block">Enviar foto de perfil</span>
                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                     <input type="file" id="upload" name="imagem_perfil" class="account-file-input"
-                                        accept=".png, .jpeg .jpg" hidden />
+                                        accept=".png, .jpeg, .jpg" hidden />
                                 </label>
                                 <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
                                     <i class="bx bx-reset d-block d-sm-none"></i>
