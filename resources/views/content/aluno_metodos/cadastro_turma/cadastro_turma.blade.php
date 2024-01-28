@@ -168,7 +168,7 @@
                         
                         // Adicionar cada elemento à div (substitua 'seuConteudo' pelo que você deseja exibir)
                         document.getElementById('divTurmas').innerHTML += `<div class="col">
-                <div class="card text-center" style="width: 18rem;">
+                <div class="card text-center mx-auto" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">${element.modalidade.nome}</h5>
                     </div>
