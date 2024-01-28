@@ -28,7 +28,7 @@
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="parentesco" class="form-label">Grau de parentesco com o aluno</label>
                                     <select id="parentesco" name="parentesco" class="form-select">
-                                        <option>Selecione o grau de parentesco</option>
+                                        <option value="" disabled selected hidden>Selecione o grau de parentesco</option>
                                         <option value="Pai">Pai</option>
                                         <option value="Mae">Mãe</option>
                                         <option value="Irmao">Irmão ou Irmã</option>
@@ -138,8 +138,8 @@
                                 </div>
                                 <div class="col-12 col-md-6 col-lg-3 mb-4">
                                     <label for="bairro" class="form-label">Bairro onde mora</label>
-                                    <select id="bairro" name="bairro" class="form-select">
-                                        <option>Bairro</option>
+                                    <select id="bairro" name="bairro" class="form-select" required>
+                                        <option value="" disabled selected hidden>Bairro</option>
                                         @foreach ($bairros as $bairro)
                                             <option value="{{ $bairro }}">{{ $bairro }}</option>
                                         @endforeach

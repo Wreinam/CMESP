@@ -71,6 +71,7 @@ class ChamadaController extends Controller
         $alunos = Matricula::select('matriculas.id', 'users.name', 'users.id', 'users.imagem_perfil')
             ->join('users', 'matriculas.aluno_id', '=', 'users.id')
             ->where('matriculas.turma_id', $aula->turma_id)
+            ->where('status', 'Matriculado')
             ->get();
 
         return response()->json($alunos);

@@ -46,11 +46,41 @@ class RegisterBasic extends Controller
       'cpf_aluno.unique' => 'Este CPF já está em uso.',
     ]);
 
+    if ($request->maiorIdadeInput == "false") {
+
+      $validator = Validator::make($request->all(), [
+        'parentesco' => 'required|string',
+        'nome_responsavel' => 'required|string|max:255',
+        'cpf_responsavel' => 'required|string',
+        'rg_responsavel' => 'required|string',
+        'rg_responsavel_frente' => 'required',
+        'rg_responsavel_verso' => 'required',
+      ], [
+        'parentesco.required' => 'O campo grau de parentesco é obrigatório.',
+        'nome_responsavel.required' => 'O campo nome do responsável é obrigatório.',
+        'cpf_responsavel.required' => 'O campo CPF responsável é obrigatório.',
+        'rg_responsavel.required' => 'O campo RG responsavel é obrigatório.',
+        'rg_responsavel_frente.required' => 'Você deixou de enviar a foto do RG de frente do responsável.',
+        'rg_responsavel_verso.required' => 'Você deixou de enviar a foto do RG do verso do responsável.',
+      ]);
+
+      if ($validator->fails()) {
+        return redirect('register')
+          ->withErrors($validator)
+          ->withInput();
+      }
+    }
+
     if ($validator->fails()) {
       return redirect('register')
         ->withErrors($validator)
         ->withInput();
     }
+    
+
+
+
+
     $idade = $this->calcularIdadeAPartirDaData($request->data_nascimento);
 
     $user = new User();
@@ -95,6 +125,16 @@ class RegisterBasic extends Controller
     }
 
     if ($request->maiorIdadeInput == "false") {
+
+      
+
+      if ($validator->fails()) {
+        return redirect('register')
+          ->withErrors($validator)
+          ->withInput();
+      }
+
+
       $responsavelDado = new Responsavel_dado();
       $responsavelDado->grauParentesco = $request->parentesco;
       $responsavelDado->nomeResponsavel = $request->nome_responsavel;
