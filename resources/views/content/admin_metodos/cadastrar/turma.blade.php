@@ -279,6 +279,7 @@
                 },
                 dataType: 'json',
                 success: function(res) {
+                    $('#novaTurmaForm').trigger("reset");
                     $('#modalNovaTurma').modal('show');
                     $('#id').val(res.id);
                     $('#modalidade').val(res.modalidade_id);
