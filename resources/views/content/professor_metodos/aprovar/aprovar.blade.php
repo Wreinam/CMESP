@@ -93,7 +93,9 @@
                     console.log(response)
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.pivot.aluno_id, aluno.name,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>`
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
+                            `
                         ]).draw();
                     })
 
@@ -124,7 +126,38 @@
 
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.pivot.aluno_id, aluno.name,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>`
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
+                            `
+                        ]).draw();
+                    });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+        function desaprovarAluno(idAluno, idTurma) {
+            $.ajax({
+                url: '{{ route('desaprovar-aluno') }}',
+                type: 'POST',
+                data: {
+                    idAluno: idAluno,
+                    idTurma: idTurma,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response);
+
+                    // Limpar e redesenhar a tabela
+                    var tabela = $('#tabela-lista-espera').DataTable();
+                    tabela.clear().draw();
+
+                    $.each(response, function(index, aluno) {
+                        tabela.row.add([aluno.pivot.aluno_id, aluno.name,
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
+                            `
                         ]).draw();
                     });
                 },

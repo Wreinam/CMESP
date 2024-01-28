@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Professor']], function ()
         Route::get('/buscar/lista', [Turma_Professor::class, 'index'])->name('dashboard-professor-buscar-lista');
         Route::post('/buscar/lista-espera', [Turma_Professor::class, 'show'])->name('buscar-lista-espera');
         Route::post('aprovar/aluno', [Turma_Professor::class, 'aprovarAluno'])->name('aprovar-aluno');
+        Route::post('desaprovar/aluno', [Turma_Professor::class, 'desaprovarAluno'])->name('desaprovar-aluno');
 
         Route::get('/buscar/chamada', [ChamadaController::class, 'index'])->name('dashboard-professor-buscar-chamada');
         Route::post('/buscar/aulas', [ChamadaController::class, 'showAulas'])->name('buscar-aulas');
