@@ -8,7 +8,7 @@
     },
     {
       "name": "Cadastrar",
-      "icon": "menu-icon tf-icons bx bx-layout",
+      "icon": "menu-icon tf-icons bx bxs-folder-plus",
       "slug": "dashboard-admin-cadastrar",
       "submenu":[
         {
@@ -35,7 +35,7 @@
     },
     {
       "name": "Relatorios",
-      "icon": "menu-icon tf-icons bx bx-layout",
+      "icon": "menu-icon tf-icons bx bxs-bar-chart-alt-2",
       "slug": "dashboard-admin-relatorios",
       "submenu":[
         {
@@ -56,13 +56,13 @@
     {
       "url": "/dashboard/aluno/cadastro/anamnese",
       "name": "Anamnese",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bx-book-heart",
       "slug": "dashboard-aluno-cadastro-anamnese"
     },
     {
       "url": "/dashboard/aluno/cadastro/turma",
       "name": "Turma",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bxs-basketball",
       "slug": "dashboard-aluno-cadastro-turma"
     }
     
@@ -77,19 +77,19 @@
     {
       "url": "/dashboard/professor/buscar/lista",
       "name": "Aprovar",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bxs-user-check",
       "slug": "dashboard-professor-buscar-lista"
     },
     {
       "url": "/dashboard/professor/buscar/chamada",
       "name": "Chamada",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bx-task",
       "slug": "dashboard-professor-buscar-chamada"
     },
     {
       "url": "/dashboard/professor/buscar/alunos",
       "name": "Dados alunos",
-      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "icon": "menu-icon tf-icons bx bx-info-circle",
       "slug": "dashboard-professor-buscar-alunos"
     }
   ],
