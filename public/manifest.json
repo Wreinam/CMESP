@@ -1,0 +1,42 @@
+{
+  "background_color": "#0400ff",
+  "description": "Aplicação de gerenciamento e de inscrição de usuários na secretaria de esportes de São Sebastião.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "CMESP",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "CMESP",
+  "start_url": "/",
+  "theme_color": "#00f26f",
+  "categories": [
+    "education",
+    "fitness",
+    "health"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "https://www.cmesp.com/assets/img/favicon/android-launchericon-512-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "https://www.cmesp.com/assets/img/favicon/android-launchericon-48-48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Teste",
+      "url": "https://th.bing.com/th/id/R.7c381f489d4b42bea46490f53ab832e5?rik=C0OTc2aAmDOxyQ&amp;riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fdT7%2foGj%2fdT7oGjqLc.png&amp;ehk=oRtShTZXQ8TSAXYo1I6hhX3hQN8xsX3zBolXKcbMbvk%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0",
+      "description": "Bola"
+    }
+  ],
+  "lang": "pt"
+}
