@@ -150,6 +150,24 @@ class Turma_Professor extends Controller
             DB::table('lista_espera')->where('aluno_id', $idAluno)->where('turma_id', $idTurma)->delete();
             $turma = Turma::find($idTurma);
             $alunos = $turma->users()->select('name')->get();
+
+            $user = User::find($idAluno);
+
+            if ($user) {
+                $email = $user->email;
+                $nomeAluno = $user->name;
+                $modalidade = $turma->modalidade->nome;
+                $horario = $turma->horario;
+
+                $mensagem = 'Infelizmente o aluno: ' . $nomeAluno . ' foi DESAPROVADO pela Secretaria de Esportes, na modalidade de: ' . $modalidade . ' no horário: ' . $horario . ', por favor se inscreva em outra turma.';
+
+                Mail::raw($mensagem, function ($message) use ($email, $nomeAluno) {
+                    $message->to($email, $nomeAluno)
+                        ->subject('Secretaria de Esportes');
+                });
+            } else {
+                
+            }
             return response()->json($alunos);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
