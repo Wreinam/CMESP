@@ -10,6 +10,7 @@ use App\Models\Matricula;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Mail;
 
 class Turma_Professor extends Controller
 {
@@ -116,6 +117,24 @@ class Turma_Professor extends Controller
             ]);
             $turma = Turma::find($idTurma);
             $alunos = $turma->users()->select('name')->get();
+
+            $user = User::find($idAluno);
+
+            if ($user) {
+                $email = $user->email;
+                $nomeAluno = $user->name;
+                $modalidade = $turma->modalidade->nome;
+                $horario = $turma->horario;
+
+                $mensagem = 'Parabéns ' . $nomeAluno . ' você foi aprovado pela Secretaria de Esportes, compareça no próximo dia de aula de: ' . $modalidade . ' no horário: ' . $horario . ' para ter aula.';
+
+                Mail::raw($mensagem, function ($message) use ($email, $nomeAluno) {
+                    $message->to($email, $nomeAluno)
+                        ->subject('Secretaria de Esportes');
+                });
+            } else {
+                
+            }
 
             return response()->json($alunos);
         } catch (\Exception $e) {

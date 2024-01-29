@@ -11,11 +11,15 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Bairro;
 use Twilio\Rest\Client;
 use App\Models\Turma;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
   public function index()
   {
+
+    
+    
     return view('content.authentications.auth-login-basic');
   }
   public function deslogar(Request $request)

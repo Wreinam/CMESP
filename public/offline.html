@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falta de conexão</title>
-    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Sua PWA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .offline-message {
+            background-color: #ffc107;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Mensagem para exibir offline -->
-        <div class="alert alert-warning" role="alert">
-            Você está offline. Por favor, verifique sua conexão com a internet.
-        </div>
-
-        <!-- Conteúdo principal da sua aplicação PWA -->
-        <h1>Não conseguimos acessar o APP pois você está sem conexão.</h1>
-        <!-- Outros elementos da sua PWA aqui -->
+    <!-- Mensagem para exibir offline -->
+    <div class="offline-message">
+        Você está offline. Por favor, verifique sua conexão com a internet.
     </div>
-
-    <!-- Adicione os scripts do Bootstrap e qualquer outro script necessário -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- Outros scripts da sua aplicação aqui -->
 </body>
 </html>
