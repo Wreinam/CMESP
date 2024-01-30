@@ -116,7 +116,7 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
         Route::post('/edit/turma', [TurmaController::class, 'edit'])->name('edit-turma');
         Route::post('/delete/turma', [TurmaController::class, 'destroy'])->name('delete-turma');
 
-        Route::get('alunos', [AlunosController::class,'index'])->name('dashboard-admin-alunos');
+        Route::get('/alunos', [AlunosController::class,'index'])->name('dashboard-admin-alunos');
         Route::get('/buscar/alunos', [AlunosController::class, 'show'])->name('buscar-alunos');
         Route::post('/buscar/aluno', [AlunosController::class, 'showAluno'])->name('buscar-dados-aluno');
         Route::post('/resetar/senha', [AlunosController::class, 'resetarSenha'])->name('resetar-senha');

@@ -110,13 +110,8 @@ class Turma_Professor extends Controller
         try {
             $idAluno = $request->idAluno;
             $idTurma = $request->idTurma;
-            DB::table('lista_espera')->where('aluno_id', $idAluno)->where('turma_id', $idTurma)->delete();
-            Matricula::create([
-                'aluno_id' => $idAluno,
-                'turma_id' => $idTurma,
-            ]);
+
             $turma = Turma::find($idTurma);
-            $alunos = $turma->users()->select('name')->get();
 
             $user = User::find($idAluno);
 
@@ -132,10 +127,16 @@ class Turma_Professor extends Controller
                     $message->to($email, $nomeAluno)
                         ->subject('Secretaria de Esportes');
                 });
-            } else {
-                
-            }
 
+                DB::table('lista_espera')->where('aluno_id', $idAluno)->where('turma_id', $idTurma)->delete();
+                Matricula::create([
+                    'aluno_id' => $idAluno,
+                    'turma_id' => $idTurma,
+                ]);
+            } else {
+
+            }
+            $alunos = $turma->users()->select('name')->get();
             return response()->json($alunos);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -166,7 +167,6 @@ class Turma_Professor extends Controller
                         ->subject('Secretaria de Esportes');
                 });
             } else {
-                
             }
             return response()->json($alunos);
         } catch (\Exception $e) {
