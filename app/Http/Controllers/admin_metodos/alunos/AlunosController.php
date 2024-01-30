@@ -18,13 +18,11 @@ class AlunosController extends Controller
     public function show(User $alunos)
     {
         $alunos = User::select('users.id', 'users.name', 'users.imagem_perfil', 'users.email', 'users.cpf')
-            ->where('users.permissao', 'Aluno')
-            ->leftJoin('matriculas', 'users.id', '=', 'matriculas.aluno_id')
-            ->where('matriculas.status', '=', 'Matriculado')
-            ->groupBy('users.id', 'users.name', 'users.imagem_perfil', 'users.email', 'users.cpf')
-            ->selectRaw('COALESCE(COUNT(matriculas.aluno_id), 0) as matriculas_quantidade, 
-                 COALESCE((SELECT COUNT(aluno_id) FROM lista_espera WHERE lista_espera.aluno_id = users.id), 0) as lista_espera_quantidade')
-            ->get();
+    ->where('users.permissao', 'Aluno')
+    ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM matriculas WHERE matriculas.aluno_id = users.id AND matriculas.status = "Matriculado") as matriculas_quantidade')
+    ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM lista_espera WHERE lista_espera.aluno_id = users.id) as lista_espera_quantidade')
+    ->get();
+
 
         return DataTables::of($alunos)
             ->addColumn('action', '_partials/action')
