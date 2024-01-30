@@ -50,7 +50,7 @@
                             <table id="tabela-aulas" class="table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        
+
                                         <th>Dia da Aula</th>
                                         <th>Status</th>
                                         <th>Ação</th>
@@ -84,7 +84,7 @@
                                             <th>Nome</th>
                                             <th>Presença</th>
                                             <th>Justificado</th>
-                                            
+
                                         </tr>
                                     </thead>
                                 </table>
@@ -239,13 +239,13 @@
                     $.each(response, function(index, aluno) {
                         tabela.row.add([
                             `<div class="avatar avatar-online">
-                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" alt class="w-px-40 h-auto rounded-circle">
+                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
                                  </div>`,
                             aluno.name,
                             `<input type="hidden" name="presenca[${aluno.id}]" value="Faltou">
                             <input type="checkbox" name="presenca[${aluno.id}]" value="Presente" style="width: 20px; height: 20px;">`,
                             `<input type="checkbox" name="presenca[${aluno.id}]" value="Justificado" style="width: 20px; height: 20px;">`,
-                            
+
                         ]).draw();
                     });
 
@@ -257,6 +257,18 @@
                     console.log(error);
                 }
             });
+        }
+
+        function zoomImage(img) {
+
+            if (img.style.transform === 'scale(4)') {
+                img.style.transform = 'scale(1)';
+                img.style.zIndex = 'auto';
+            } else {
+
+                img.style.transform = 'scale(4)';
+                img.style.zIndex = '1081';
+            }
         }
     </script>
 @endsection

@@ -54,6 +54,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nome Aluno</th>
+                                        <th>Imagem Perfil</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -92,6 +93,9 @@
                     console.log(response)
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.name,
+                            `<div class="avatar">
+                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+                                 </div>`,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `
@@ -125,6 +129,9 @@
 
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.name,
+                            `<div class="avatar">
+                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+                                 </div>`,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `
@@ -136,6 +143,7 @@
                 }
             });
         }
+
         function desaprovarAluno(idAluno, idTurma) {
             $.ajax({
                 url: '{{ route('desaprovar-aluno') }}',
@@ -154,6 +162,9 @@
 
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.name,
+                            `<div class="avatar">
+                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+                                 </div>`,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `
@@ -164,6 +175,18 @@
                     console.log(error);
                 }
             });
+        }
+
+        function zoomImage(img) {
+
+            if (img.style.transform === 'scale(4)') {
+                img.style.transform = 'scale(1)';
+                img.style.zIndex = 'auto';
+            } else {
+
+                img.style.transform = 'scale(4)';
+                img.style.zIndex = '1081';
+            }
         }
     </script>
 @endsection

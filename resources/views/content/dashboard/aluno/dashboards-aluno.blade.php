@@ -22,12 +22,24 @@
                     <div class="col-sm-7">
                         <div class="card-body">
                             <h5 class="card-title text-primary">Bem-vindo {{ auth()->user()->name }}! 🎉</h5>
-                            <p class="mb-4">Nenhuma mensagem de aviso!</p>
-
-                            <a href="javascript:;" class="btn btn-sm btn-outline-primary">Enviar Mensagem</a>
+                            @if (auth()->user()->imagem_perfil === 'avatarPadrao.png' || auth()->user()->imagem_perfil == '')
+                                <div class="alert alert-danger d-flex" role="alert">
+                                    <div class="d-flex flex-column ps-1">
+                                        <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Alerta - Facilite a
+                                            vida do professor :) </h6>
+                                        <span>Faça o upload de uma imagem de perfil bem bonita sua!</span>
+                                    </div>
+                                    <a class="ms-4" href="{{ route('conta-configuracao') }}">
+                                        <button type="button" class="btn btn-danger">Clique aqui</button>
+                                    </a>
+                                </div>
+                            @else
+                                <p class="mb-4">Nenhuma mensagem de aviso!</p>
+                            @endif
+                            {{-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">Enviar Mensagem</a> --}}
                         </div>
                     </div>
-                    <div class="col-sm-5 text-center text-sm-left">
+                    <div class="col-sm-5 text-center text-sm-left d-none d-md-inline">
                         <div class="card-body pb-0 px-0 px-md-4">
                             <img src="{{ asset('assets/img/illustrations/alunos.png') }}" height="140"
                                 alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png"
