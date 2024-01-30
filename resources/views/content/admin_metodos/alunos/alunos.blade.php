@@ -14,6 +14,8 @@
                         <th>Nome</th>
                         <th>E-mail</th>
                         <th>CPF</th>
+                        <th>Matriculas</th>
+                        <th>Lista de espera</th>
                         <th>Ação</th>
                     </tr>
                 </thead>
@@ -25,7 +27,7 @@
 
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:200000;">
-        <div id="mensagem" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
+        <div id="mensagem" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <strong class="me-auto">Mensagem</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -45,6 +47,8 @@
             }
         });
 
+       
+
         new DataTable('#tabela-dados-alunos', {
             processing: true,
             serverSide: true,
@@ -63,6 +67,22 @@
                     render: function(data, type, full, meta) {
                         // Formatação do CPF
                         return data.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                    }
+                },
+                {
+                    data: "matriculas_quantidade",
+                    name: "matriculas_quantidade",
+                    render: function(data, type, full, meta) {
+                        // Formatação do CPF
+                        return data + " Turmas";
+                    }
+                },
+                {
+                    data: "lista_espera_quantidade",
+                    name: "lista_espera_quantidade",
+                    render: function(data, type, full, meta) {
+                        // Formatação do CPF
+                        return data + " Listas";
                     }
                 },
                 {
@@ -181,15 +201,15 @@
 
         function resetarSenha(id) {
             $.ajax({
-                type: "POST", 
-                url: "{{route('resetar-senha')}}",
+                type: "POST",
+                url: "{{ route('resetar-senha') }}",
                 data: {
                     id: id
                 },
                 success: function(response) {
                     $("#corpoMensagem").text(response.mensagem);
-                        const toast = new bootstrap.Toast($('#mensagem'))
-                        toast.show()
+                    const toast = new bootstrap.Toast($('#mensagem'))
+                    toast.show()
 
                 },
                 error: function(error) {

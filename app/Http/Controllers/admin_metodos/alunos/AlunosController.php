@@ -17,7 +17,14 @@ class AlunosController extends Controller
     }
     public function show(User $alunos)
     {
-        $alunos = User::select('id','name', 'imagem_perfil', 'email', 'cpf',)->where('permissao', 'Aluno')->get();
+        $alunos = User::select('users.id', 'users.name', 'users.imagem_perfil', 'users.email', 'users.cpf')
+            ->where('users.permissao', 'Aluno')
+            ->leftJoin('matriculas', 'users.id', '=', 'matriculas.aluno_id')
+            ->where('matriculas.status', '=', 'Matriculado')
+            ->groupBy('users.id', 'users.name', 'users.imagem_perfil', 'users.email', 'users.cpf')
+            ->selectRaw('COALESCE(COUNT(matriculas.aluno_id), 0) as matriculas_quantidade, 
+                 COALESCE((SELECT COUNT(aluno_id) FROM lista_espera WHERE lista_espera.aluno_id = users.id), 0) as lista_espera_quantidade')
+            ->get();
 
         return DataTables::of($alunos)
             ->addColumn('action', '_partials/action')
@@ -33,23 +40,22 @@ class AlunosController extends Controller
     }
 
     public function resetarSenha(Request $request)
-{
-    // Obter a data de nascimento do usuário
-    $user = User::with('user_informacoe')->find($request->id);
-    
-    if ($user) {
-        $dataNascimento = $user->user_informacoe->dataNascimento;
+    {
+        // Obter a data de nascimento do usuário
+        $user = User::with('user_informacoe')->find($request->id);
 
-        // Remover hífens e formatar a data de nascimento no formato desejado (15032017)
-        $numerosDataNascimento = implode("", array_reverse(explode('-', $dataNascimento)));
+        if ($user) {
+            $dataNascimento = $user->user_informacoe->dataNascimento;
 
-        // Atualizar a senha do usuário com a nova senha baseada na data de nascimento formatada
-        User::where('id', $request->id)->update(['password' => Hash::make($numerosDataNascimento)]);
+            // Remover hífens e formatar a data de nascimento no formato desejado (15032017)
+            $numerosDataNascimento = implode("", array_reverse(explode('-', $dataNascimento)));
 
-        return response()->json(['mensagem' => 'Senha resetada com sucesso'], 200);
-    } else {
-        return response()->json(['error' => 'Usuário não encontrado'], 404);
+            // Atualizar a senha do usuário com a nova senha baseada na data de nascimento formatada
+            User::where('id', $request->id)->update(['password' => Hash::make($numerosDataNascimento)]);
+
+            return response()->json(['mensagem' => 'Senha resetada com sucesso'], 200);
+        } else {
+            return response()->json(['error' => 'Usuário não encontrado'], 404);
+        }
     }
-}
-
 }
