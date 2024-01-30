@@ -34,7 +34,8 @@ class AlunosController extends Controller
     public function showAluno(Request $request)
     {
         $aluno = User::with('user_informacoe', 'user_estuda', 'responsavel_dados', 'user_anamnese')->find($request->id);
-        return response()->json($aluno);
+        $matriculas = $aluno->matriculas()->with('turma')->where('status', 'Matriculado')->get();
+        return response()->json([$aluno, $matriculas]);
     }
 
     public function resetarSenha(Request $request)

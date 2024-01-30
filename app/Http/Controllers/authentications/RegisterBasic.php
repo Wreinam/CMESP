@@ -23,28 +23,7 @@ class RegisterBasic extends Controller
   public function store(Request $request)
   {
     $request->merge(['cpf_aluno' => str_replace(['.', '-'], '', $request->input('cpf_aluno'))]);
-    $validator = Validator::make($request->all(), [
-      'nome_aluno' => 'required|string|max:255',
-      'email' => 'required|string|email|max:255|unique:users',
-      'password' => 'required|string|min:8|confirmed',
-      'cpf_aluno' => [
-        'required',
-        'unique:users,cpf,NULL,id', // Use 'CPF' como nome real do campo no banco
-
-      ],
-
-
-    ], [
-      'name.required' => 'O campo nome é obrigatório.',
-      'email.required' => 'O campo e-mail é obrigatório.',
-      'email.email' => 'Por favor, insira um endereço de e-mail válido.',
-      'email.unique' => 'Este e-mail já está em uso.',
-      'password.required' => 'O campo senha é obrigatório.',
-      'password.min' => 'A senha deve ter pelo menos :min caracteres.',
-      'password.confirmed' => 'A confirmação da senha não corresponde.',
-      'cpf_aluno.required' => 'O campo CPF é obrigatório.',
-      'cpf_aluno.unique' => 'Este CPF já está em uso.',
-    ]);
+    
 
     if ($request->maiorIdadeInput == "false") {
 
@@ -70,6 +49,45 @@ class RegisterBasic extends Controller
           ->withInput();
       }
     }
+
+    if ($request->estudaInput == "true") {
+      $validator = Validator::make($request->all(), [
+        'nome_escola' => 'required|string',
+        'serie' => 'required|string',
+        'periodo' =>'required|string',
+      ], [
+          'nome_escola.required'=> 'Esquceu de colocar o nome da escola.',
+          'serie.required'=> 'Esqueceu de colocar a série do aluno.',
+          'periodo.required'=> 'Esqueceu de colocar o periodo que o aluno estuda.',
+        ]);
+
+        if ($validator->fails()) {
+          return redirect('register')
+            ->withErrors($validator)
+            ->withInput();
+        }
+    }
+
+    $validator = Validator::make($request->all(), [
+      'nome_aluno' => 'required|string|max:255',
+      'email' => 'required|string|email|max:255|unique:users',
+      'password' => 'required|string|min:8|confirmed',
+      'cpf_aluno' => [
+      'required',
+      'unique:users,cpf,NULL,id', // Use 'CPF' como nome real do campo no banco
+
+      ],
+    ], [
+      'name.required' => 'O campo nome é obrigatório.',
+      'email.required' => 'O campo e-mail é obrigatório.',
+      'email.email' => 'Por favor, insira um endereço de e-mail válido.',
+      'email.unique' => 'Este e-mail já está em uso.',
+      'password.required' => 'O campo senha é obrigatório.',
+      'password.min' => 'A senha deve ter pelo menos :min caracteres.',
+      'password.confirmed' => 'A confirmação da senha não corresponde.',
+      'cpf_aluno.required' => 'O campo CPF é obrigatório.',
+      'cpf_aluno.unique' => 'Este CPF já está em uso.',
+    ]);
 
     if ($validator->fails()) {
       return redirect('register')

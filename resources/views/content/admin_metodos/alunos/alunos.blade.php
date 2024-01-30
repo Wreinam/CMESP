@@ -110,6 +110,7 @@
                 },
                 dataType: 'json',
                 success: function(response) {
+                    console.log(response)
                     $('#resetarSenhaBTN').on("click", function() {
                         resetarSenha(response.id);
                     });
