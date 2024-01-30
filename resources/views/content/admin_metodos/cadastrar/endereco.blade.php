@@ -28,7 +28,6 @@
                 </thead>
             </table>
         </div>
-
     </div>
 
     <div class="modal fade" id="modalNovaEndereco" data-bs-backdrop="static" tabindex="-1">
@@ -114,6 +113,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        
         new DataTable('#tabela-endereco', {
             processing: true,
             serverSide: true,

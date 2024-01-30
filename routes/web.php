@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin_metodos\alunos\AlunosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,8 @@ use App\Http\Controllers\aluno_controllers\turma\Turma_AlunoController;
 
 use App\Http\Controllers\professor_metodos\chamada\ChamadaController;
 use App\Http\Controllers\professor_metodos\turma\Turma_Professor;
+
+
 
 use App\Http\Controllers\admin_metodos\relatorios\RelatorioDemandaController;
 
@@ -112,6 +115,11 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
         Route::post('/cadastro/turma', [TurmaController::class, 'store'])->name('cadastrar-turma');
         Route::post('/edit/turma', [TurmaController::class, 'edit'])->name('edit-turma');
         Route::post('/delete/turma', [TurmaController::class, 'destroy'])->name('delete-turma');
+
+        Route::get('alunos', [AlunosController::class,'index'])->name('dashboard-admin-alunos');
+        Route::get('/buscar/alunos', [AlunosController::class, 'show'])->name('buscar-alunos');
+        Route::post('/buscar/aluno', [AlunosController::class, 'showAluno'])->name('buscar-dados-aluno');
+        Route::post('/resetar/senha', [AlunosController::class, 'resetarSenha'])->name('resetar-senha');
 
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');
         Route::get('/relatorio/demanda', [RelatorioDemandaController::class, 'quantidadeDemandaPorBairroModalidade'])->name('quantidadeDemandaPorBairroModalidade');

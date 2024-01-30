@@ -50,7 +50,7 @@
                             <table id="tabela-aulas" class="table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        
                                         <th>Dia da Aula</th>
                                         <th>Status</th>
                                         <th>Ação</th>
@@ -179,7 +179,6 @@
                                 `<button type="button" class="btn btn-primary" disabled>Chamada Feita</button>`
                         }
                         tabela.row.add([
-                            aula.id,
                             dataFormatada,
                             aula.status,
                             botaoChamada,

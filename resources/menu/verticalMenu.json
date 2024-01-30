@@ -44,6 +44,12 @@
           "slug": "dashboard-admin-relatorios-demanda"
         }
       ]
+    },
+    {
+      "url": "/dashboard/admin/alunos",
+      "name": "Alunos",
+      "icon": "menu-icon tf-icons bx bx-user",
+      "slug": "dashboard-admin-alunos"
     }
   ],
   "menuAluno": [

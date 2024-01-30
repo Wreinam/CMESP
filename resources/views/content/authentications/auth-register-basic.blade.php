@@ -233,8 +233,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="mb-4 text-dark">
-                        <label for="telefone_aluno" class="form-label text-dark fs-5 me-5">Você é maior de
-                            idade?</label></br>
+                        <label for="telefone_aluno" class="form-label text-dark fs-5 me-5">O aluno é maior de idade?</label></br>
 
                         <div class="form-check form-check-inline mt-3">
                             <input class="form-check-input" type="radio" name="maiorIdade" id="maiorSim"
@@ -249,7 +248,7 @@
 
                     </div>
                     <div class="text-dark">
-                        <label for="telefone_aluno" class="form-label text-dark fs-5 me-5">Você é estudante?</label></br>
+                        <label for="telefone_aluno" class="form-label text-dark fs-5 me-5">O aluno é estudante ainda?</label></br>
 
                         <div class="form-check form-check-inline mt-3">
                             <input class="form-check-input" type="radio" name="estuda" id="estudanteSim"

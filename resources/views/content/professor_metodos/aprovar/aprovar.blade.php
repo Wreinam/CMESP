@@ -53,7 +53,6 @@
                             <table id="tabela-lista-espera" class="table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>Nome Aluno</th>
                                         <th>Ações</th>
                                     </tr>
@@ -92,7 +91,7 @@
                     tabela.clear().draw();
                     console.log(response)
                     $.each(response, function(index, aluno) {
-                        tabela.row.add([aluno.pivot.aluno_id, aluno.name,
+                        tabela.row.add([aluno.name,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `
@@ -125,7 +124,7 @@
                     tabela.clear().draw();
 
                     $.each(response, function(index, aluno) {
-                        tabela.row.add([aluno.pivot.aluno_id, aluno.name,
+                        tabela.row.add([aluno.name,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `
@@ -154,7 +153,7 @@
                     tabela.clear().draw();
 
                     $.each(response, function(index, aluno) {
-                        tabela.row.add([aluno.pivot.aluno_id, aluno.name,
+                        tabela.row.add([aluno.name,
                             `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
                             `

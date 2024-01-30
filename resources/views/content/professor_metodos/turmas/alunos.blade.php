@@ -54,7 +54,6 @@
                             <table id="tabela-matriculas" class="table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
                                         <th>Nome Aluno</th>
                                         <th>Faltas</th>
                                         <th>Status</th>
@@ -365,7 +364,7 @@
             </div>
         </div>
     @else
-        Voçê nao possuir turmas.
+        Você não possui turmas.
     @endif
 @endsection
 
@@ -389,7 +388,6 @@
                     tabela.clear().draw();
                     $.each(response, function(index, aluno) {
                         tabela.row.add([
-                            aluno.aluno_id,
                             aluno.name,
                             aluno.faltas,
                             aluno.status,
@@ -417,7 +415,6 @@
                     tabela.clear().draw();
                     $.each(response, function(index, aluno) {
                         tabela.row.add([
-                            aluno.aluno_id,
                             aluno.name,
                             aluno.faltas,
                             aluno.status,
