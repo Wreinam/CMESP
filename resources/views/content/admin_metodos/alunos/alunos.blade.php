@@ -21,7 +21,8 @@
         </div>
     </div>
 
-    @include('content\admin_metodos\alunos\modal-dados-aluno')
+    @include('content/admin_metodos/alunos/modal-dados-aluno')
+
 
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:200000;">
         <div id="mensagem" class="toast" role="alert" aria-live="assertive" aria-atomic="true" >
