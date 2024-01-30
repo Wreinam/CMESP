@@ -120,22 +120,26 @@ class Turma_Professor extends Controller
                 $nomeAluno = $user->name;
                 $modalidade = $turma->modalidade->nome;
                 $horario = $turma->horario;
-
+            
                 $mensagem = 'Parabéns ' . $nomeAluno . ' você foi aprovado pela Secretaria de Esportes, compareça no próximo dia de aula de: ' . $modalidade . ' no horário: ' . $horario . ' para ter aula.';
-
-                Mail::raw($mensagem, function ($message) use ($email, $nomeAluno) {
-                    $message->to($email, $nomeAluno)
-                        ->subject('Secretaria de Esportes');
-                });
-
+            
+                try {
+                    Mail::raw($mensagem, function ($message) use ($email, $nomeAluno) {
+                        $message->to($email, $nomeAluno)
+                            ->subject('Secretaria de Esportes');
+                    });
+                } catch (\Exception $e) {
+                    
+                }
+                // Continuar com as outras operações, independentemente do resultado do envio de e-mail
                 DB::table('lista_espera')->where('aluno_id', $idAluno)->where('turma_id', $idTurma)->delete();
                 Matricula::create([
                     'aluno_id' => $idAluno,
                     'turma_id' => $idTurma,
                 ]);
             } else {
-
             }
+            
             $alunos = $turma->users()->select('name')->get();
             return response()->json($alunos);
         } catch (\Exception $e) {
