@@ -18,10 +18,10 @@ class AlunosController extends Controller
     public function show(User $alunos)
     {
         $alunos = User::select('users.id', 'users.name', 'users.imagem_perfil', 'users.email', 'users.cpf')
-    ->where('users.permissao', 'Aluno')
-    ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM matriculas WHERE matriculas.aluno_id = users.id AND matriculas.status = "Matriculado") as matriculas_quantidade')
-    ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM lista_espera WHERE lista_espera.aluno_id = users.id) as lista_espera_quantidade')
-    ->get();
+            ->where('users.permissao', 'Aluno')
+            ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM matriculas WHERE matriculas.aluno_id = users.id AND matriculas.status = "Matriculado") as matriculas_quantidade')
+            ->selectRaw('(SELECT COALESCE(COUNT(aluno_id), 0) FROM lista_espera WHERE lista_espera.aluno_id = users.id) as lista_espera_quantidade')
+            ->get();
 
 
         return DataTables::of($alunos)
@@ -34,8 +34,25 @@ class AlunosController extends Controller
     public function showAluno(Request $request)
     {
         $aluno = User::with('user_informacoe', 'user_estuda', 'responsavel_dados', 'user_anamnese')->find($request->id);
-        //$matriculas = $aluno->matriculas()->with('turma')->where('status', 'Matriculado')->get();
-        return response()->json($aluno);
+        $matriculas = $aluno->matriculas()
+            ->where('status', 'Matriculado')
+            ->with(['turma' => function ($query) {
+                $query->with('modalidade:id,nome', 'professor:id,name', 'endereco');
+            }])
+            ->get();
+
+        $listaEspera = $aluno->turmas()
+            ->with('modalidade:id,nome', 'professor:id,name', 'endereco')
+            ->get();
+
+
+        $responseData = [
+            'aluno' => $aluno,
+            'matriculas' => $matriculas,
+            'listaEspera' => $listaEspera,
+        ];
+
+        return response()->json($responseData);
     }
 
     public function resetarSenha(Request $request)

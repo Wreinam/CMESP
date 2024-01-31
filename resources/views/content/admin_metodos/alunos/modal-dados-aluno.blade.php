@@ -24,6 +24,14 @@
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                                 data-bs-target="#navs-top-align-document">Documentos</button>
                         </li>
+                        <li class="nav-item" id="div_matriculas">
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                data-bs-target="#navs-top-align-matriculas">Matriculas</button>
+                        </li>
+                        <li class="nav-item" id="div_listaEspera">
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                                data-bs-target="#navs-top-align-listaEspera">Lista espera</button>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="navs-top-align-home">
@@ -61,7 +69,8 @@
                                         </div>
                                         <div class="mb-3 col-md-3 col-12">
                                             <label for="idade" class="form-label">Idade</label>
-                                            <input class="form-control" type="text" id="idade" value="Vazio" />
+                                            <input class="form-control" type="text" id="idade"
+                                                value="Vazio" />
                                         </div>
                                         <div class="mb-3 col-md-3 col-12">
                                             <label for="nome_mae" class="form-label">Nome da Mãe</label>
@@ -265,17 +274,46 @@
                             </div>
 
                         </div>
+                        <div class="tab-pane fade" id="navs-top-align-matriculas">
+                            <div class="row g-3" id="div_matriculas_colunas">
+                                <div class="col-12 col-md-4 mb-5">
+                                    <div class="card shadow-none bg-transparent border border-primary">
+                                        <div class="card-header">anos</div>
+                                        <div class="card-body text-primary">
+                                            <h5 class="card-title"></h5>
+                                            <p class="card-text">Nível:</p>
+                                            <p class="card-text">Dias da Semana:
+
+                                            </p>
+                                            <p class="card-text">Horário: </p>
+                                            <p class="card-text">Faltas: </p>
+                                            <p class="card-text">Status: </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="navs-top-align-listaEspera">
+                            <div class="row" id="div_listaEspera_colunas">
+                                
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="resetarSenhaBTN" class="btn btn-danger" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="<i class='bx bxs-radiation' ></i> <span>Reseta para a data de aniversário sem barras.</span>">RESETAR SENHA</button>
+                <button type="button" id="resetarSenhaBTN" class="btn btn-danger" data-bs-toggle="tooltip"
+                    data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true"
+                    title="<i class='bx bxs-radiation' ></i> <span>Reseta para a data de aniversário sem barras.</span>">RESETAR
+                    SENHA</button>
                 <div class="ms-auto">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-offset="0,4" data-bs-placement="top" data-bs-html="true" title="<i class='bx bx-bell bx-xs' ></i> <span>Não funcionando</span>">Salvar Mudanças</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-offset="0,4"
+                        data-bs-placement="top" data-bs-html="true"
+                        title="<i class='bx bx-bell bx-xs' ></i> <span>Não funcionando</span>">Salvar Mudanças</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>

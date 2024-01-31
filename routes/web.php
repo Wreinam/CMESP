@@ -121,6 +121,9 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
         Route::post('/buscar/aluno', [AlunosController::class, 'showAluno'])->name('buscar-dados-aluno');
         Route::post('/resetar/senha', [AlunosController::class, 'resetarSenha'])->name('resetar-senha');
 
+        Route::get('/matriculas', [AlunosController::class,'index'])->name('dashboard-admin-matriculas');
+
+
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');
         Route::get('/relatorio/demanda', [RelatorioDemandaController::class, 'quantidadeDemandaPorBairroModalidade'])->name('quantidadeDemandaPorBairroModalidade');
     });

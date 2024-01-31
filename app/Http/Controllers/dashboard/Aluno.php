@@ -29,7 +29,6 @@ class Aluno extends Controller
             $matriculas = null;
         }
 
-
         return view('content.dashboard.aluno.dashboards-aluno', compact(['existeAnamnese', 'turmasListaEspera', 'matriculas']));
     }
 
