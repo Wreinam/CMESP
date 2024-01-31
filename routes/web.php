@@ -34,6 +34,7 @@ use App\Http\Controllers\professor_metodos\turma\Turma_Professor;
 
 
 use App\Http\Controllers\admin_metodos\relatorios\RelatorioDemandaController;
+use App\Http\Controllers\admin_metodos\matriculas\MatriculaController;
 
 // Main Page Route
 Route::get('/', $controller_path . '\authentications\LoginController@index')->name('login');
@@ -121,7 +122,8 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
         Route::post('/buscar/aluno', [AlunosController::class, 'showAluno'])->name('buscar-dados-aluno');
         Route::post('/resetar/senha', [AlunosController::class, 'resetarSenha'])->name('resetar-senha');
 
-        Route::get('/matriculas', [AlunosController::class,'index'])->name('dashboard-admin-matriculas');
+        Route::get('/matriculas', [MatriculaController::class,'index'])->name('dashboard-admin-matriculas');
+        Route::get('/buscar/matriculas', [MatriculaController::class, 'showMatriculas'])->name('buscar-matriculas');
 
 
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');

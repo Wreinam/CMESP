@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin_metodos\matriculas;
 
 use App\Models\Matricula;
 use App\Http\Controllers\Controller;
+use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class MatriculaController extends Controller
@@ -15,7 +16,14 @@ class MatriculaController extends Controller
      */
     public function index()
     {
-        //
+        return view('content.admin_metodos.matriculas.matriculas');
+    }
+
+    public function showMatriculas(Request $request)
+    {
+        $turma = Turma::find($request->id);
+        $matriculas = $turma->matriculas()->select('name', 'matriculas.*')->where('status', 'Matriculado')->get();
+        return response()->json($matriculas);
     }
 
     /**

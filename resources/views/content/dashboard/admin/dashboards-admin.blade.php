@@ -54,7 +54,7 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                        <a class="dropdown-item" href="javascript:void(0);">Ver mais</a>
+                                        <a class="dropdown-item" href="{{route('dashboard-admin-matriculas')}}">Ver mais</a>
                                     </div>
                                 </div>
                             </div>

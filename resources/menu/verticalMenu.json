@@ -50,7 +50,14 @@
       "name": "Alunos",
       "icon": "menu-icon tf-icons bx bx-user",
       "slug": "dashboard-admin-alunos"
+    },
+    {
+      "url": "/dashboard/admin/matriculas",
+      "name": "Matriculas",
+      "icon": "menu-icon tf-icons bx bxs-user-check",
+      "slug": "dashboard-admin-matriculas"
     }
+    
   ],
   "menuAluno": [
     {
