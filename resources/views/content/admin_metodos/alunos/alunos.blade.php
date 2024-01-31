@@ -226,6 +226,7 @@
 
                         $('#div_matriculas').removeClass('d-none');
                     } else {
+                        $('#div_matriculas_colunas').html('');
                         $('#div_matriculas').addClass('d-none');
                     }
 
@@ -252,6 +253,7 @@
                         });
                         $('#div_listaEspera').removeClass('d-none');
                     } else {
+                        $('#div_listaEspera_colunas').html('');
                         $('#div_listaEspera').addClass('d-none');
                     }
                 },
