@@ -112,8 +112,8 @@
 
         function mostrarAlunos(idTurma) {
             $.ajax({
-                url: '{{ route('buscar-matriculas') }}',
-                type: 'GET',
+                url: '{{ route('buscar-matriculas-admin') }}',
+                type: 'POST',
                 data: {
                     id: idTurma
                 },
