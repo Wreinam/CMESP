@@ -52,7 +52,7 @@
         new DataTable('#tabela-dados-alunos', {
             processing: true,
             serverSide: true,
-            "ajax": "{{ route('buscar-alunos') }}",
+            "ajax": "{{ route('buscar-alunos-admin') }}",
             "columns": [{
                     data: "name",
                     name: "name"

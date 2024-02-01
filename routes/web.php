@@ -123,7 +123,7 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
         Route::post('/resetar/senha', [AlunosController::class, 'resetarSenha'])->name('resetar-senha');
 
         Route::get('/matriculas', [MatriculaController::class,'index'])->name('dashboard-admin-matriculas');
-        Route::get('/buscar/matriculas', [MatriculaController::class, 'showMatriculas'])->name('buscar-matriculas');
+        Route::POST('/buscar/matriculas/admin', [MatriculaController::class, 'showMatriculas'])->name('buscar-matriculas-admin');
 
 
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');
