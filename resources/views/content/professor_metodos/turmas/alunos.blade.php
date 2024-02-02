@@ -473,18 +473,18 @@
                         //Anamnese
                         $('#cardiaco').val(JSON.parse(response.user_anamnese.cardiaco) === null ?
                             'Nenhum problema' : JSON.parse(response.user_anamnese.cardiaco));
-                        $('#alergia').val(JSON.parse(response.user_anamnese.alergia) === null ?
+                        $('#alergias').val(JSON.parse(response.user_anamnese.alergia) === null ?
                             'Nenhuma alergia' :
                             JSON.parse(response.user_anamnese.alergia));
                         $('#osseo').val(JSON.parse(response.user_anamnese.osseo) === null ? 'Nenhum problema' :
                             JSON
                             .parse(response.user_anamnese.osseo));
-                        $('#doenca').val(JSON.parse(response.user_anamnese.doenca) === null ? 'Nenhuma doença' :
-                            JSON.parse(response.user_anamnese.doenca));
-                        $('#tratamento').val(JSON.parse(response.user_anamnese.tratamento) === null ?
-                            'Nenhum tratamento' : JSON.parse(response.user_anamnese.tratamento));
-                        $('#medicamento').val(JSON.parse(response.user_anamnese.medicamento) === null ?
-                            'Nenhum medicamento' : JSON.parse(response.user_anamnese.medicamento));
+                        $('#doenca').val(response.user_anamnese.doenca === null ? 'Nenhuma doença' :
+                            response.user_anamnese.doenca);
+                        $('#tratamento').val(response.user_anamnese.tratamento === null ?
+                            'Nenhum tratamento' : response.user_anamnese.tratamento);
+                        $('#medicamento').val(response.user_anamnese.medicamento === null ?
+                            'Nenhum medicamento' : response.user_anamnese.medicamento);
                         $('#fumante').val(response.user_anamnese.fumante);
                         $('#diabetico').val(response.user_anamnese.diabetico);
                         $('#insulina').val(response.user_anamnese.insulina);

@@ -111,10 +111,11 @@
                 dataType: 'json',
                 success: function(response) {
 
+                    console.log(response)
+
                     alunoDados = response.aluno;
                     matriculas = response.matriculas;
                     listaEspera = response.listaEspera;
-                    console.log(listaEspera)
                     $('#resetarSenhaBTN').on("click", function() {
                         resetarSenha(alunoDados.id);
                     });
@@ -155,20 +156,20 @@
                         //Anamnese
                         $('#cardiaco').val(JSON.parse(alunoDados.user_anamnese.cardiaco) === null ?
                             'Nenhum problema' : JSON.parse(alunoDados.user_anamnese.cardiaco));
-                        $('#alergia').val(JSON.parse(alunoDados.user_anamnese.alergia) === null ?
+                        $('#alergias').val(JSON.parse(alunoDados.user_anamnese.alergia) === null ?
                             'Nenhuma alergia' :
                             JSON.parse(alunoDados.user_anamnese.alergia));
                         $('#osseo').val(JSON.parse(alunoDados.user_anamnese.osseo) === null ?
                             'Nenhum problema' :
                             JSON
                             .parse(alunoDados.user_anamnese.osseo));
-                        $('#doenca').val(JSON.parse(alunoDados.user_anamnese.doenca) === null ?
+                        $('#doenca').val(alunoDados.user_anamnese.doenca === null ?
                             'Nenhuma doença' :
-                            JSON.parse(alunoDados.user_anamnese.doenca));
-                        $('#tratamento').val(JSON.parse(alunoDados.user_anamnese.tratamento) === null ?
-                            'Nenhum tratamento' : JSON.parse(alunoDados.user_anamnese.tratamento));
-                        $('#medicamento').val(JSON.parse(alunoDados.user_anamnese.medicamento) === null ?
-                            'Nenhum medicamento' : JSON.parse(alunoDados.user_anamnese.medicamento));
+                            alunoDados.user_anamnese.doenca);
+                        $('#tratamento').val(alunoDados.user_anamnese.tratamento === null ?
+                            'Nenhum tratamento' : alunoDados.user_anamnese.tratamento);
+                        $('#medicamento').val(alunoDados.user_anamnese.medicamento === null ?
+                            'Nenhum medicamento' : alunoDados.user_anamnese.medicamento);
                         $('#fumante').val(alunoDados.user_anamnese.fumante);
                         $('#diabetico').val(alunoDados.user_anamnese.diabetico);
                         $('#insulina').val(alunoDados.user_anamnese.insulina);
