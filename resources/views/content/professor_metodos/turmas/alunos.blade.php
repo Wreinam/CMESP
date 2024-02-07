@@ -499,7 +499,6 @@
 
                     if (response.responsavel_dados !== null && response.responsavel_dados !== undefined) {
                         //Caso ele seja menos de idade
-                        console.log(response)
                         $('#grau_parentesco').val(response.responsavel_dados.grauParentesco);
                         $('#nome_responsavel').val(response.responsavel_dados.nomeResponsavel);
                         $('#cpf_responsavel').val(response.responsavel_dados.cpfResponsavel);

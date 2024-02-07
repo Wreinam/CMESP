@@ -42,7 +42,7 @@
 
         </div>
         <div class="modal" tabindex="-1" id="modalListaEspera">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Lista de espera</h5>
@@ -68,8 +68,49 @@
             </div>
         </div>
     @else
-        Voç^ê nao possuir turmas para dar aula.
+        Você não possui turmas para dar aula.
     @endif
+
+    <div class="modal fade" id="dadosAluno" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Dados Básicos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="mb-3 col-12">
+                            <label for="nome" class="form-label">Nome
+                            </label>
+                            <input class="form-control-plaintext" type="text"
+                                id="nome" value="Nome" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-12">
+                            <label for="nome" class="form-label">Idade
+                            </label>
+                            <input class="form-control-plaintext" type="text"
+                                id="idade" value="Idade" readonly />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-12">
+                            <label for="nome" class="form-label">Telefone
+                            </label>
+                            <input class="form-control-plaintext" type="text"
+                                id="telefone" value="Telefone" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-target="#modalListaEspera"
+                    data-bs-toggle="modal">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script-da-pagina')
@@ -95,8 +136,15 @@
                             `<div class="avatar">
                                 <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
                                  </div>`,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
-                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class="bx bx-user-check bx-sm"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class='bx bxs-user-x bx-sm'></i>
+                            </button>
+                            <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
+                                <i class='bx bx-info-circle bx-sm'></i>
+                            </button>
                             `
                         ]).draw();
                     })
@@ -165,6 +213,25 @@
                             `
                         ]).draw();
                     });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function buscarAluno(idAluno) {
+            $.ajax({
+                url: '{{ route('buscar-aluno') }}',
+                type: 'POST',
+                data: {
+                    id: idAluno,
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#nome').val(response.name);
+                    $('#idade').val(response.user_informacoe.idade);
+                    $('#telefone').val(response.user_informacoe.telefone);
                 },
                 error: function(error) {
                     console.log(error);
