@@ -38,7 +38,6 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    console.log(data)
                     let modalidadesSet = new Set(); // Conjunto para armazenar as modalidades únicas
                     data.forEach(item => {
                         modalidadesSet.add(item.modalidade);

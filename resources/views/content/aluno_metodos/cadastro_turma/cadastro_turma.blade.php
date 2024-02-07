@@ -158,7 +158,6 @@
                     professor:professor,
                 },
                 success: function(response) {
-                    console.log(response)
                     document.getElementById('divTurmas').innerHTML = '';
                     response.turmaFiltrada.forEach(element => {
                         console.log(element);

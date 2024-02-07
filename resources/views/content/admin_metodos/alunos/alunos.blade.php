@@ -110,9 +110,6 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-
-                    console.log(response)
-
                     alunoDados = response.aluno;
                     matriculas = response.matriculas;
                     listaEspera = response.listaEspera;

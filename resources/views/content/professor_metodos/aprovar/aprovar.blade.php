@@ -90,7 +90,6 @@
                     // Atualize dinamicamente o conteúdo da tabela no modal
                     var tabela = $('#tabela-lista-espera').DataTable();
                     tabela.clear().draw();
-                    console.log(response)
                     $.each(response, function(index, aluno) {
                         tabela.row.add([aluno.name,
                             `<div class="avatar">
@@ -121,8 +120,6 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-
                     // Limpar e redesenhar a tabela
                     var tabela = $('#tabela-lista-espera').DataTable();
                     tabela.clear().draw();
@@ -154,8 +151,6 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
-
                     // Limpar e redesenhar a tabela
                     var tabela = $('#tabela-lista-espera').DataTable();
                     tabela.clear().draw();

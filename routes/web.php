@@ -31,8 +31,6 @@ use App\Http\Controllers\aluno_controllers\turma\Turma_AlunoController;
 use App\Http\Controllers\professor_metodos\chamada\ChamadaController;
 use App\Http\Controllers\professor_metodos\turma\Turma_Professor;
 
-
-
 use App\Http\Controllers\admin_metodos\relatorios\RelatorioDemandaController;
 use App\Http\Controllers\admin_metodos\matriculas\MatriculaController;
 
@@ -49,7 +47,6 @@ Route::post('/logar', [LoginController::class, 'auth'])->name('logar');
 Route::get('/conta/configuracao', [LoginController::class, 'configuracao'])->name('conta-configuracao')->middleware('auth');
 Route::post('/salvar/configuracao', [LoginController::class, 'salvarConfiguracao'])->name('salvar-configuracao')->middleware('auth');
 
-
 Route::group(['middleware' => ['auth', 'checkPermissao:Aluno']], function () {
     Route::prefix('/dashboard/aluno')->group(function () {
         Route::get('/', [Aluno::class, 'index'])->name('dashboard-aluno');
@@ -62,7 +59,6 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Aluno']], function () {
         Route::post('cadastro/filtrar', [Turma_AlunoController::class,'filtrarTurma'])->name('filtrar-turmas');
     });
 });
-
 
 Route::group(['middleware' => ['auth', 'checkPermissao:Professor']], function () {
     Route::prefix('/dashboard/professor')->group(function () {
@@ -86,7 +82,6 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Professor']], function ()
         Route::post('desmatricular/aluno', [Turma_Professor::class, 'updateMatricula'])->name('desmatricular-aluno');
     });
 });
-
 
 Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
     Route::prefix('/dashboard/admin')->group(function () {
@@ -124,7 +119,6 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
 
         Route::get('/matriculas', [MatriculaController::class,'index'])->name('dashboard-admin-matriculas');
         Route::post('/buscar/matriculas/admin', [MatriculaController::class, 'showMatriculas'])->name('buscar-matriculas-admin');
-
 
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');
         Route::get('/relatorio/demanda', [RelatorioDemandaController::class, 'quantidadeDemandaPorBairroModalidade'])->name('quantidadeDemandaPorBairroModalidade');

@@ -206,15 +206,9 @@
                 dataType: 'json',
 
                 success: function(response) {
-                    console.log(response);
-
                     $('#cancelarAula_id').val(idAula);
                     $('#justificativa').val(response.justificativa);
                     $('#cancelarModal').modal('show');
-
-
-
-
                 },
                 error: function(error) {
                     console.log(error);
