@@ -157,7 +157,7 @@ class RegisterBasic extends Controller
         $responsavelDado->save();
       }
     }
-
+    
     return redirect('/')->with('registrado', 'Registrado');
   }
 

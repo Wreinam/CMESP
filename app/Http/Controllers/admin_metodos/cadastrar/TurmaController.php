@@ -110,6 +110,54 @@ class TurmaController extends Controller
                     ]);
                 }
             }
+        } else {
+
+            $diasSelecionadosPeloGestor = $request->dia_semana;
+            // Mapeie os dias da semana para seus equivalentes ISO 8601
+            $mapeamentoDiasSemana = [
+                "Domingo" => 7,
+                "Segunda-feira" => 1,
+                "Terca-feira" => 2,
+                "Quarta-feira" => 3,
+                "Quinta-feira" => 4,
+                "Sexta-feira" => 5,
+                "Sabado" => 6,
+            ];
+
+            // Crie um array com os números dos dias escolhidos
+            $diasEscolhidos = array_map(function ($dia) use ($mapeamentoDiasSemana) {
+                return $mapeamentoDiasSemana[$dia];
+            }, $diasSelecionadosPeloGestor);
+
+            // Defina o período de aulas desejado
+            $dataInicio = $request->data_inicio;
+            $dataFim = $request->data_termino;
+
+            // Crie um objeto Carbon para cada data
+            $inicio = new Carbon($dataInicio);
+            $fim = new Carbon($dataFim);
+
+            // Itere sobre o período
+            for ($i = 0; $i <= $fim->diffInDays($inicio); $i++) {
+                $dataAtual = $inicio->copy()->addDays($i);
+
+                // Verifique se o dia da semana atual está na lista de dias escolhidos
+                if (in_array($dataAtual->dayOfWeekIso, $diasEscolhidos)) {
+                    // Verifique se já existe um registro para esta data e turma
+                    $aulaExistente = Aula::where('data', $dataAtual->toDateString())
+                        ->where('turma_id', $turma->id)
+                        ->exists();
+
+                    // Se não existir, persista a informação no banco de dados
+                    if (!$aulaExistente) {
+                        Aula::create([
+                            'data' => $dataAtual->toDateString(),
+                            'dia_semana' => $dataAtual->dayOfWeekIso,
+                            'turma_id' => $turma->id,
+                        ]);
+                    }
+                }
+            }
         }
         return Response()->json($turma);
     }
