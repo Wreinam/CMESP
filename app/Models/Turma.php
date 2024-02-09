@@ -48,4 +48,5 @@ class Turma extends Model
     public function users(){
         return $this->belongsToMany(User::class, 'lista_espera', 'turma_id', 'aluno_id');
     }
+
 }
