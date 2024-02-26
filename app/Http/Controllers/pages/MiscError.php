@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\authentications;
+namespace App\Http\Controllers\pages;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ForgotPasswordBasic extends Controller
+class MiscError extends Controller
 {
   public function index()
   {

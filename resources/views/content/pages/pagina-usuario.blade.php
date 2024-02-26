@@ -15,8 +15,10 @@
                 @if (auth()->user()->permissao === 'Aluno')
                     <li class="nav-item"><a class="nav-link" href="{{ url('pages/account-settings-notifications') }}"><i
                                 class="bx bx-bell me-1"></i> Dados Responsável</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('pages/account-settings-connections') }}"><i
+                    <li class="nav-item"><a class="nav-link" href="{{ url('pages/misc-error') }}"><i
                                 class="bx bx-link-alt me-1"></i> Dados Estudante</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('pages/account-settings-connections') }}"><i
+                                class="bx bx-link-alt me-1"></i> Atestado Médico</a></li>
                 @endif
             </ul>
             <form id="formAccountSettings" action="{{ route('salvar-configuracao') }}" method="POST"
@@ -122,8 +124,9 @@
                                 <div class="col-12 col-md-6 d-flex align-items-start align-items-sm-center gap-4">
                                     <img src="{{ asset('assets/img/rg_aluno/' . $user_informacao->rgFrente) }}"
                                         alt="user-avatar" class="d-block rounded" height="100" width="100"
-                                        id="uploade_rg_frente" onclick="zoomImage(this)" style="cursor: pointer;
-                                        transition: transform 0.3s ease-in-out;"/>
+                                        id="uploade_rg_frente" onclick="zoomImage(this)"
+                                        style="cursor: pointer;
+                                        transition: transform 0.3s ease-in-out;" />
 
                                     <div class="button-wrapper">
 
@@ -143,8 +146,9 @@
                                 <div class="col-12 col-md-6 d-flex align-items-start align-items-sm-center gap-4">
                                     <img src="{{ asset('assets/img/rg_aluno/' . $user_informacao->rgVerso) }}"
                                         alt="user-avatar" class="d-block rounded" height="100" width="100"
-                                        id="uploade_rg_verso" onclick="zoomImage(this)"  style="cursor: pointer;
-                                        transition: transform 0.3s ease-in-out;"/>
+                                        id="uploade_rg_verso" onclick="zoomImage(this)"
+                                        style="cursor: pointer;
+                                        transition: transform 0.3s ease-in-out;" />
 
                                     <div class="button-wrapper">
 
@@ -214,7 +218,7 @@
                 img.style.transform = 'scale(1)';
                 img.style.zIndex = 'auto';
             } else {
-                
+
                 img.style.transform = 'scale(4)';
                 img.style.zIndex = '1081';
             }

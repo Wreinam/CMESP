@@ -27,6 +27,9 @@ use App\Http\Controllers\admin_metodos\cadastrar\TurmaController;
 
 use App\Http\Controllers\aluno_controllers\anamnese\AnamneseController;
 use App\Http\Controllers\aluno_controllers\turma\Turma_AlunoController;
+use App\Http\Controllers\pages\AccountSettingsAccount;
+use App\Http\Controllers\pages\AccountSettingsNotifications;
+use App\Http\Controllers\pages\AccountSettingsConnections;
 
 use App\Http\Controllers\professor_metodos\chamada\ChamadaController;
 use App\Http\Controllers\professor_metodos\turma\Turma_Professor;
@@ -43,8 +46,10 @@ Route::get('/forgot-password', $controller_path . '\authentications\ForgotPasswo
 
 Route::post('/registrar/cadastro', $controller_path . '\authentications\RegisterBasic@store')->name('registrar-aluno');
 Route::post('/logar', [LoginController::class, 'auth'])->name('logar');
-
-Route::get('/conta/configuracao', [LoginController::class, 'configuracao'])->name('conta-configuracao')->middleware('auth');
+Route::get('/pages/account-settings-account', [AccountSettingsAccount::class, 'index'])->name('pages-account-settings-account');
+Route::get('/pages/account-settings-notifications', [AccountSettingsNotifications::class, 'index'])->name('pages-account-settings-notifications');
+Route::get('/pages/account-settings-connections', [AccountSettingsConnections::class, 'index'])->name('pages-account-settings-connections');
+Route::get('/configuracao', [LoginController::class, 'configuracao'])->name('conta-configuracao')->middleware('auth');
 Route::post('/salvar/configuracao', [LoginController::class, 'salvarConfiguracao'])->name('salvar-configuracao')->middleware('auth');
 
 Route::group(['middleware' => ['auth', 'checkPermissao:Aluno']], function () {
