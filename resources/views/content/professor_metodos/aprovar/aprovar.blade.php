@@ -177,9 +177,15 @@
                             `<div class="avatar">
                                 <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
                                  </div>`,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
-                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
-                            `
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class="bx bx-user-check bx-sm"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class='bx bxs-user-x bx-sm'></i>
+                            </button>
+                            <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
+                                <i class='bx bx-info-circle bx-sm'></i>
+                            </button>`
                         ]).draw();
                     });
                 },
@@ -208,9 +214,15 @@
                             `<div class="avatar">
                                 <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
                                  </div>`,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Aprovar</button>
-                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">Desaprovar</button>
-                            `
+                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class="bx bx-user-check bx-sm"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                                <i class='bx bxs-user-x bx-sm'></i>
+                            </button>
+                            <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
+                                <i class='bx bx-info-circle bx-sm'></i>
+                            </button>`
                         ]).draw();
                     });
                 },
