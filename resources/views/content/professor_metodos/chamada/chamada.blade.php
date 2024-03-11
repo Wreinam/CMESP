@@ -237,7 +237,7 @@
                                  </div>`,
                             aluno.name,
                             `<input type="hidden" name="presenca[${aluno.id}]" value="Faltou">
-                            <input type="checkbox" name="presenca[${aluno.id}]" value="Presente" style="width: 20px; height: 20px;">`,
+                            <input type="checkbox" name="presenca[${aluno.id}]" value="Presente" style="width: 20px; height: 20px;" checked>`,
                             `<input type="checkbox" name="presenca[${aluno.id}]" value="Justificado" style="width: 20px; height: 20px;">`,
 
                         ]).draw();
