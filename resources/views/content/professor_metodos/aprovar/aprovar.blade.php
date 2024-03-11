@@ -53,7 +53,7 @@
                             <table id="tabela-lista-espera" class="table table-striped" style="width:100%;">
                                 <thead>
                                     <tr>
-                                        <th>Data Inscricão</th>
+                                        <th>Data Inscrição</th>
                                         <th>Nome Aluno</th>
                                         <th>Imagem Perfil</th>
                                         <th>Ações</th>
