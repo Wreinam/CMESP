@@ -101,7 +101,7 @@ class Turma_Professor extends Controller
     public function show(Request $request)
     {
         $turma = Turma::find($request->id);
-        $alunos = $turma->users()->select('name', 'imagem_perfil')->get();
+        $alunos = $turma->users()->select('name', 'imagem_perfil', 'lista_espera.created_at')->orderBy('lista_espera.created_at')->get();
         return response()->json($alunos);
     }
 

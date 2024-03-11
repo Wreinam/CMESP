@@ -17,6 +17,7 @@ class Professor extends Controller
      */
     public function index()
 {
+
     $idUsuario = Auth::id();
 
     $quantidadeAlunosNaListaEspera = DB::table('lista_espera')

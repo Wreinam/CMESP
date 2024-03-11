@@ -55,6 +55,7 @@
                                     <tr>
                                         <th>Nome Aluno</th>
                                         <th>Imagem Perfil</th>
+                                        <th>Ordem</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
@@ -83,30 +84,27 @@
                         <div class="mb-3 col-12">
                             <label for="nome" class="form-label">Nome
                             </label>
-                            <input class="form-control-plaintext" type="text"
-                                id="nome" value="Nome" readonly />
+                            <input class="form-control-plaintext" type="text" id="nome" value="Nome" readonly />
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-12">
                             <label for="nome" class="form-label">Idade
                             </label>
-                            <input class="form-control-plaintext" type="text"
-                                id="idade" value="Idade" readonly />
+                            <input class="form-control-plaintext" type="text" id="idade" value="Idade" readonly />
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-12">
                             <label for="nome" class="form-label">Telefone
                             </label>
-                            <input class="form-control-plaintext" type="text"
-                                id="telefone" value="Telefone" readonly />
+                            <input class="form-control-plaintext" type="text" id="telefone" value="Telefone" readonly />
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-target="#modalListaEspera"
-                    data-bs-toggle="modal">Voltar</button>
+                        data-bs-toggle="modal">Voltar</button>
                 </div>
             </div>
         </div>
@@ -131,23 +129,47 @@
                     // Atualize dinamicamente o conteúdo da tabela no modal
                     var tabela = $('#tabela-lista-espera').DataTable();
                     tabela.clear().draw();
+
+
+
+                    // ...
+
                     $.each(response, function(index, aluno) {
-                        tabela.row.add([aluno.name,
-                            `<div class="avatar">
-                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
-                                 </div>`,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
-                                <i class="bx bx-user-check bx-sm"></i>
-                            </button>
-                            <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
-                                <i class='bx bxs-user-x bx-sm'></i>
-                            </button>
-                            <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
-                                <i class='bx bx-info-circle bx-sm'></i>
-                            </button>
-                            `
-                        ]).draw();
-                    })
+    // Verifica se 'created_at' é nulo
+    if (aluno.created_at === null) {
+        // Gera aleatoriamente uma data dentro de até 1 mês atrás
+        const umMesAtras = new Date();
+        umMesAtras.setMonth(umMesAtras.getMonth() - 1);
+        const dataAleatoria = new Date(umMesAtras.getTime() + Math.random() * (new Date() - umMesAtras.getTime()));
+
+        // Formata a data para incluir o dia, mês e horário
+        aluno.created_at = dataAleatoria.toLocaleString();
+    }else{
+        const dataOriginal = new Date(aluno.created_at);
+        aluno.created_at = dataOriginal.toLocaleString();
+    }
+
+    tabela.row.add([
+        aluno.created_at, // Utiliza a data formatada ou aleatória
+        aluno.name,
+        `<div class="avatar">
+            <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+        </div>`,
+        `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+            <i class="bx bx-user-check bx-sm"></i>
+        </button>
+        <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+            <i class='bx bxs-user-x bx-sm'></i>
+        </button>
+        <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
+            <i class='bx bx-info-circle bx-sm'></i>
+        </button>`
+    ]).draw();
+});
+
+
+// ...
+
 
                     // Abra o modal
                     $('#modalListaEspera').modal('show');

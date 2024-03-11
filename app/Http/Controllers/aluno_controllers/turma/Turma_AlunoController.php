@@ -12,6 +12,7 @@ use App\Models\Anamnese;
 use App\Models\Bairro;
 use App\Models\Matricula;
 use App\Models\Modalidade;
+use App\Models\Lista_espera;
 
 class Turma_AlunoController extends Controller
 {
@@ -71,20 +72,26 @@ class Turma_AlunoController extends Controller
     }
 
     public function storeListaEspera(Request $request)
-    {
-        $user = Auth::user();
-        $turmaId = $request->id;
+{
+    $user = Auth::user();
+    $turmaId = $request->id;
 
-        // Verificar se o usuário já está inscrito na turma
-        $jaInscrito = $user->turmas()->where('turma_id', $turmaId)->exists();
-        $jaMatriculado = Matricula::where('aluno_id', $user->id)->where('turma_id', $turmaId)->where('status', 'Matriculado')->get();
+    // Verificar se o usuário já está inscrito na turma
+    $jaInscrito = $user->turmas()->where('turma_id', $turmaId)->exists();
+    $jaMatriculado = Matricula::where('aluno_id', $user->id)->where('turma_id', $turmaId)->where('status', 'Matriculado')->get();
 
-        if (!$jaInscrito && $jaMatriculado->isEmpty()) {
-            // Se não estiver inscrito, inscrever na turma
-            $user->turmas()->attach($turmaId);
-            return response()->json(['mensagem' => 'Inscrição na turma realizada com sucesso']);
-        } else {
-            return response()->json(['mensagem' => 'Usuário já está inscrito nesta turma']);
-        }
+    if (!$jaInscrito && $jaMatriculado->isEmpty()) {
+        // Se não estiver inscrito, inscrever na turma usando o método save
+        $listaEspera = new Lista_espera();
+        $listaEspera->aluno_id = $user->id;
+        $listaEspera->turma_id = $turmaId;
+
+        // Salvar o modelo, que irá incluir as timestamps automaticamente
+        $listaEspera->save();
+
+        return response()->json(['mensagem' => 'Inscrição na turma realizada com sucesso']);
+    } else {
+        return response()->json(['mensagem' => 'Usuário já está inscrito nesta turma']);
     }
+}
 }
