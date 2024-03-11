@@ -140,7 +140,7 @@ class Turma_Professor extends Controller
             } else {
             }
             
-            $alunos = $turma->users()->select('name')->get();
+            $alunos = $turma->users()->select('name', 'imagem_perfil', 'lista_espera.created_at')->orderBy('lista_espera.created_at')->get();
             return response()->json($alunos);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
@@ -154,7 +154,7 @@ class Turma_Professor extends Controller
             $idTurma = $request->idTurma;
             DB::table('lista_espera')->where('aluno_id', $idAluno)->where('turma_id', $idTurma)->delete();
             $turma = Turma::find($idTurma);
-            $alunos = $turma->users()->select('name')->get();
+            $alunos = $turma->users()->select('name', 'imagem_perfil', 'lista_espera.created_at')->orderBy('lista_espera.created_at')->get();
 
             $user = User::find($idAluno);
 
