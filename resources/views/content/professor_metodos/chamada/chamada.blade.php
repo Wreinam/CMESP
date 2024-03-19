@@ -154,7 +154,11 @@
                 dataType: 'json',
                 success: function(response) {
                     // Atualize dinamicamente o conteúdo da tabela no modal
-                    var tabela = $('#tabela-aulas').DataTable();
+                    var tabela = $('#tabela-aulas').DataTable(
+                      language: {
+                          url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/pt-BR.json',
+                      },
+                    );
                     tabela.clear().draw();
                     $.each(response, function(index, aula) {
                         const partesData = aula.data.split("-");
