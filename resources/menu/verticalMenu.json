@@ -53,9 +53,15 @@
     },
     {
       "url": "/dashboard/admin/matriculas",
-      "name": "Matriculas",
+      "name": "Matrículas",
       "icon": "menu-icon tf-icons bx bxs-user-check",
       "slug": "dashboard-admin-matriculas"
+    },
+    {
+      "url": "/dashboard/admin/lista-espera",
+      "name": "Lista de Espera",
+      "icon": "menu-icon tf-icons bx bxs-user-detail",
+      "slug": "dashboard-admin-lista-espera"
     }
     
   ],

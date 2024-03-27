@@ -113,9 +113,8 @@
 
 @section('script-da-pagina')
     <script>
-        $(document).ready(function() {
-            $('#tabelaAlunos').DataTable();
-        });
+        
+
 
         function mostrarAlunos(idTurma) {
             $.ajax({
@@ -218,30 +217,30 @@
             }
         }
 
-        function carregarAlunos(response, tabela){
+        function carregarAlunos(response, tabela) {
             $.each(response, function(index, aluno) {
-                        // Verifica se 'created_at' é nulo
-                        if (aluno.created_at === null) {
-                            // Gera aleatoriamente uma data dentro de até 1 mês atrás
-                            const umMesAtras = new Date();
-                            umMesAtras.setMonth(umMesAtras.getMonth() - 1);
-                            const dataAleatoria = new Date(umMesAtras.getTime() + Math.random() * (
-                                new Date() - umMesAtras.getTime()));
+                // Verifica se 'created_at' é nulo
+                if (aluno.created_at === null) {
+                    // Gera aleatoriamente uma data dentro de até 1 mês atrás
+                    const umMesAtras = new Date();
+                    umMesAtras.setMonth(umMesAtras.getMonth() - 1);
+                    const dataAleatoria = new Date(umMesAtras.getTime() + Math.random() * (
+                        new Date() - umMesAtras.getTime()));
 
-                            // Formata a data para incluir o dia, mês e horário
-                            aluno.created_at = dataAleatoria.toLocaleString();
-                        } else {
-                            const dataOriginal = new Date(aluno.created_at);
-                            aluno.created_at = dataOriginal.toLocaleString();
-                        }
+                    // Formata a data para incluir o dia, mês e horário
+                    aluno.created_at = dataAleatoria.toLocaleString();
+                } else {
+                    const dataOriginal = new Date(aluno.created_at);
+                    aluno.created_at = dataOriginal.toLocaleString();
+                }
 
-                        tabela.row.add([
-                            aluno.created_at, // Utiliza a data formatada ou aleatória
-                            aluno.name,
-                            `<div class="avatar">
+                tabela.row.add([
+                    aluno.created_at, // Utiliza a data formatada ou aleatória
+                    aluno.name,
+                    `<div class="avatar">
                             <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
                             </div>`,
-                            `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
+                    `<button type="button" class="btn btn-primary" onclick="aprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
                                 <i class="bx bx-user-check bx-sm"></i>
                             </button>
                             <button type="button" class="btn btn-danger" onclick="desaprovarAluno(${aluno.pivot.aluno_id},${aluno.pivot.turma_id})">
@@ -250,8 +249,8 @@
                             <button type="button" class="btn btn-info" data-bs-target="#dadosAluno" data-bs-toggle="modal" onclick="buscarAluno(${aluno.pivot.aluno_id})">
                                 <i class='bx bx-info-circle bx-sm'></i>
                             </button>`
-                        ]).draw();
-                    });
+                ]).draw();
+            });
         }
     </script>
 @endsection

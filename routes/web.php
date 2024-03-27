@@ -24,7 +24,7 @@ use App\Http\Controllers\admin_metodos\cadastrar\ModalidadeController;
 use App\Http\Controllers\admin_metodos\cadastrar\ProfessorController;
 use App\Http\Controllers\admin_metodos\cadastrar\EnderecoController;
 use App\Http\Controllers\admin_metodos\cadastrar\TurmaController;
-
+use App\Http\Controllers\admin_metodos\lista_espera\ListaEsperaController;
 use App\Http\Controllers\aluno_controllers\anamnese\AnamneseController;
 use App\Http\Controllers\aluno_controllers\turma\Turma_AlunoController;
 use App\Http\Controllers\pages\AccountSettingsAccount;
@@ -127,5 +127,11 @@ Route::group(['middleware' => ['auth', 'checkPermissao:Admin']], function () {
 
         Route::get('/relatorios/demanda', [RelatorioDemandaController::class, 'index'])->name('dashboard-admin-relatorios-demanda');
         Route::get('/relatorio/demanda', [RelatorioDemandaController::class, 'quantidadeDemandaPorBairroModalidade'])->name('quantidadeDemandaPorBairroModalidade');
+
+        Route::get('/lista-espera', [ListaEsperaController::class,'index'])->name('dashboard-admin-lista-espera');
+        Route::get('/buscar/turmas/lista-espera', [ListaEsperaController::class, 'showTurmasListaEspera'])->name('buscar-turmas-lista-espera');
+        Route::post('/buscar/lista-espera/admin', [ListaEsperaController::class, 'showListaEspera'])->name('buscar-lista-espera-admin');
+
+
     });
 });
