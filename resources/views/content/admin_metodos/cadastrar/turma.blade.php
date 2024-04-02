@@ -183,6 +183,7 @@
             }
         });
         new DataTable('#tabela-turma', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-turmas') }}",

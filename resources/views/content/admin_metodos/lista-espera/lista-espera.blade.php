@@ -55,6 +55,7 @@
 @section('script-da-pagina')
     <script>
         new DataTable('#tabela-turma', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-turmas-lista-espera') }}",
@@ -111,7 +112,9 @@
                 dataType: 'json',
                 success: function(response) {
                     // Atualize dinamicamente o conteúdo da tabela no modal
-                    var tabela = $('#tabela-matriculas').DataTable();
+                    var tabela = $('#tabela-matriculas').DataTable({
+                        language: ptBRTranslation,
+                    });
                     tabela.clear().draw();
                     $.each(response, function(index, aluno) {
                         tabela.row.add([

@@ -47,9 +47,8 @@
             }
         });
 
-
-
         new DataTable('#tabela-dados-alunos', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-alunos') }}",

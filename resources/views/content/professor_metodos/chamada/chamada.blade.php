@@ -154,11 +154,14 @@
                 dataType: 'json',
                 success: function(response) {
                     // Atualize dinamicamente o conteúdo da tabela no modal
-                  var tabela = new DataTable('#tabela-aulas', {
-                      language: {
-                          url: '//cdn.datatables.net/plug-ins/2.0.2/i18n/pt-BR.json',
-                      },
-                  });
+                    if ($.fn.DataTable.isDataTable('#tabela-aulas')) {
+                        $('#tabela-aulas').DataTable().destroy();
+                    }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-aulas', {
+                        language: ptBRTranslation
+                    });
                     tabela.clear().draw();
                     $.each(response, function(index, aula) {
                         const partesData = aula.data.split("-");

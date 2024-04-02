@@ -115,6 +115,7 @@
         });
         
         new DataTable('#tabela-endereco', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-enderecos') }}",

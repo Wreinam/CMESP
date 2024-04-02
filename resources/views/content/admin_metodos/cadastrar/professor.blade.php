@@ -87,6 +87,7 @@
             }
         });
         new DataTable('#tabela-professor', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-professores') }}",

@@ -60,6 +60,7 @@
             }
         });
         new DataTable('#tabela-modalidade', {
+            language: ptBRTranslation,
             processing: true,
             serverSide: true,
             "ajax": "{{ route('buscar-modalidades') }}",

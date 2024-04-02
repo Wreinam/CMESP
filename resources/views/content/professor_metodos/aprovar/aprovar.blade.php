@@ -126,7 +126,9 @@
                 dataType: 'json',
                 success: function(response) {
                     // Atualize dinamicamente o conteúdo da tabela no modal
-                    var tabela = $('#tabela-lista-espera').DataTable();
+                    var tabela = $('#tabela-lista-espera').DataTable({
+                        language: ptBRTranslation
+                    });
                     tabela.clear().draw();
 
 
@@ -153,7 +155,11 @@
                 dataType: 'json',
                 success: function(response) {
                     // Limpar e redesenhar a tabela
-                    var tabela = $('#tabela-lista-espera').DataTable();
+                    
+
+                    var tabela = $('#tabela-lista-espera').DataTable({
+                        language: ptBRTranslation
+                    });
                     tabela.clear().draw();
 
                     carregarAlunos(response, tabela);
@@ -175,7 +181,9 @@
                 dataType: 'json',
                 success: function(response) {
                     // Limpar e redesenhar a tabela
-                    var tabela = $('#tabela-lista-espera').DataTable();
+                    var tabela = $('#tabela-lista-espera').DataTable({
+                        language: ptBRTranslation
+                    });
                     tabela.clear().draw();
 
                     carregarAlunos(response, tabela);
