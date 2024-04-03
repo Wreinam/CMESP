@@ -41,7 +41,7 @@ class ListaEsperaController extends Controller
     public function showListaEspera(Request $request)
     {
         $turma = Turma::find($request->id);
-        $matriculas = $turma->matriculas()->select('name', 'matriculas.*')->where('status', 'Matriculado')->get();
-        return response()->json($matriculas);
+        $usuarios_na_lista_de_espera = $turma->users()->get();
+        return response()->json($usuarios_na_lista_de_espera);
     }
 }
