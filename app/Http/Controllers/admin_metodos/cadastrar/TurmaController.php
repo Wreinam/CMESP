@@ -220,4 +220,14 @@ class TurmaController extends Controller
         Aula::where('turma_id', $request->id)->delete();
         Turma::where('id', $request->id)->delete();
     }
+
+
+    public function duplicar(Request $request)
+    {
+        $idTurma = $request->id;
+        $turmaOriginal = Turma::find($idTurma);
+        $novaTurma = new Turma();
+        $novaTurma->fill($turmaOriginal->toArray());
+        $novaTurma->save();
+    }
 }

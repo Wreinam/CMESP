@@ -320,5 +320,22 @@
                 });
             }
         }
+
+        function duplicarFuncao(id) {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('duplicar-turma') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function() {
+                        $('#tabela-turma').DataTable().draw();
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText); // Lidar com erros
+                    }
+                });
+            
+        }
     </script>
 @endsection
