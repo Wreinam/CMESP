@@ -157,7 +157,7 @@
                     aluno.created_at, // Utiliza a data formatada ou aleatória
                     aluno.name,
                     `<div class="avatar">
-                            <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+                            <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
                             </div>`,
                 ]).draw();
             });

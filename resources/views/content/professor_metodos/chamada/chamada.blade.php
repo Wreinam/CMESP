@@ -248,7 +248,7 @@
                     $.each(response, function(index, aluno) {
                         tabela.row.add([
                             `<div class="avatar avatar-online">
-                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt class="w-px-40 h-auto rounded-circle">
+                                <img src="../../../assets/img/perfil/${aluno.imagem_perfil}" onclick="zoomImage(this)" alt style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
                                  </div>`,
                             aluno.name,
                             `<input type="hidden" name="presenca[${aluno.id}]" value="Faltou">

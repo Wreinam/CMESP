@@ -40,8 +40,8 @@ $navbarDetached = ($navbarDetached ?? '');
           <!-- User -->
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-              <div class="avatar avatar-online">
-                <img src="{{ asset('assets/img/perfil/' . auth()->user()->imagem_perfil) }}" alt class="w-px-40 h-auto rounded-circle">
+              <div class="avatar">
+                <img src="{{ asset('assets/img/perfil/' . auth()->user()->imagem_perfil) }}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -50,7 +50,7 @@ $navbarDetached = ($navbarDetached ?? '');
                   <div class="d-flex">
                     <div class="flex-shrink-0 me-3">
                       <div class="avatar avatar-online">
-                        <img src="{{ asset('assets/img/perfil/' . auth()->user()->imagem_perfil) }}" alt class="w-px-40 h-auto rounded-circle">
+                        <img src="{{ asset('assets/img/perfil/' . auth()->user()->imagem_perfil) }}" alt style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
                       </div>
                     </div>
                     <div class="flex-grow-1">
