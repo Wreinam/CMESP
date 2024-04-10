@@ -120,10 +120,15 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    // Atualize dinamicamente o conteúdo da tabela no modal
-                    var tabela = $('#tabela-matriculas').DataTable({
-                        language: ptBRTranslation,
+                    if ($.fn.DataTable.isDataTable('#tabela-matriculas')) {
+                        $('#tabela-matriculas').DataTable().destroy();
+                    }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-matriculas', {
+                        language: ptBRTranslation
                     });
+                    
                     tabela.clear().draw();
                     $.each(response, function(index, aluno) {
                         tabela.row.add([

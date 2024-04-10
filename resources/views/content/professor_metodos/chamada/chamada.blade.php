@@ -234,7 +234,15 @@
                 dataType: 'json',
                 success: function(response) {
                     // Limpar e redesenhar a tabela
-                    var tabela = $('#tabela-alunos-aula').DataTable();
+
+                    if ($.fn.DataTable.isDataTable('#tabela-alunos-aula')) {
+                        $('#tabela-alunos-aula').DataTable().destroy();
+                    }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-alunos-aula', {
+                        language: ptBRTranslation
+                    });
                     tabela.clear().draw();
 
                     $.each(response, function(index, aluno) {

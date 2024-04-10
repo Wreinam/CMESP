@@ -126,9 +126,15 @@
                 dataType: 'json',
                 success: function(response) {
                     // Atualize dinamicamente o conteúdo da tabela no modal
-                    var tabela = $('#tabela-lista-espera').DataTable({
+                    if ($.fn.DataTable.isDataTable('#tabela-lista-espera')) {
+                        $('#tabela-lista-espera').DataTable().destroy();
+                    }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-lista-espera', {
                         language: ptBRTranslation
                     });
+
                     tabela.clear().draw();
 
 
@@ -154,10 +160,12 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    // Limpar e redesenhar a tabela
-                    
+                    if ($.fn.DataTable.isDataTable('#tabela-lista-espera')) {
+                        $('#tabela-lista-espera').DataTable().destroy();
+                    }
 
-                    var tabela = $('#tabela-lista-espera').DataTable({
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-lista-espera', {
                         language: ptBRTranslation
                     });
                     tabela.clear().draw();
@@ -181,7 +189,12 @@
                 dataType: 'json',
                 success: function(response) {
                     // Limpar e redesenhar a tabela
-                    var tabela = $('#tabela-lista-espera').DataTable({
+                    if ($.fn.DataTable.isDataTable('#tabela-lista-espera')) {
+                        $('#tabela-lista-espera').DataTable().destroy();
+                    }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-lista-espera', {
                         language: ptBRTranslation
                     });
                     tabela.clear().draw();

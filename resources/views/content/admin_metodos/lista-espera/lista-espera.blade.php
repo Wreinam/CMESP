@@ -14,7 +14,7 @@
                         <th>Modalidade</th>
                         <th>Professor</th>
                         <th>Quantidade Vagas</th>
-                        <th>Vagas Ocupadas</th>
+                        <th>Aguardando</th>
                         <th>Horário</th>
                         <th>Idade: Min - Max</th>
                         <th>Ações</th>
@@ -113,16 +113,17 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    var tabela = $('#tabela-lista-espera').DataTable();
 
-                    // Verifica se o DataTable já foi inicializado
-                    if (!$.fn.DataTable.isDataTable('#tabela-lista-espera')) {
-                        tabela = $('#tabela-lista-espera').DataTable({
-                            language: ptBRTranslation
-                        });
-                    } else {
-                        tabela.clear().draw(); // Limpa os dados da tabela se já estiver inicializada
+                    if ($.fn.DataTable.isDataTable('#tabela-lista-espera')) {
+                        $('#tabela-lista-espera').DataTable().destroy();
                     }
+
+                    // Inicializar a tabela
+                    var tabela = new DataTable('#tabela-lista-espera', {
+                        language: ptBRTranslation
+                    });
+                    tabela.clear().draw(); // Limpa os dados da tabela se já estiver inicializada
+                    
 
                     carregarAlunos(response, tabela);
 
